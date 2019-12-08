@@ -1,0 +1,21 @@
+@startuml
+
+abstract WaterDropScreenPhone
+abstract LiuHaiScreenPhone
+abstract WaKongScreenPhone
+interface Phone
+class HuaWei
+class Vivo
+
+
+Phone <|.. WaterDropScreenPhone
+Phone <|.. LiuHaiScreenPhone
+Phone <|.. WaKongScreenPhone
+
+WaKongScreenPhone <|-- HuaWei
+WaKongScreenPhone <|-- Vivo
+'LiuHaiScreenPhone <|-- HuaWei
+'LiuHaiScreenPhone <|-- Vivo
+
+
+@enduml

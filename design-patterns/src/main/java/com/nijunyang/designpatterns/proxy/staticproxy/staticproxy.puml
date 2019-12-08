@@ -1,0 +1,15 @@
+@startuml
+
+
+interface Teacher{
+    void teach();
+}
+class TeacherLiProxy{
+    Teacher target;     //聚合目标对象
+    void teach();      //重写代理方法
+}
+Teacher <|.. TeacherLiProxy
+Teacher <|.. TeacherLi
+TeacherLiProxy *-- TeacherLi
+
+@enduml

@@ -1,0 +1,6 @@
+spring:
+  userdef:
+    model:
+      userName: zhangsan
+      age: 18
+      height: 1.75

@@ -1,0 +1,27 @@
+@startuml
+
+abstract WaterDropScreenPhone
+abstract LiuHaiScreenPhone
+abstract WaKongScreenPhone
+abstract Phone{
+    +Brand brand
+}
+interface Brand{
+    void call()
+}
+
+class HuaWei
+class Vivo
+
+Phone o-- Brand
+Phone <|-- WaterDropScreenPhone
+Phone <|-- LiuHaiScreenPhone
+Phone <|-- WaKongScreenPhone
+
+Brand <|.. HuaWei
+Brand <|.. Vivo
+
+'LiuHaiScreenPhone <|-- HuaWei
+'LiuHaiScreenPhone <|-- Vivo
+
+@enduml

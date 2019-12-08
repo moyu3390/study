@@ -1,0 +1,15 @@
+@startuml
+
+
+interface Teacher{
+    void teach();
+}
+
+Teacher <|.. TeacherLi
+Teacher <|.. TeacherLiProxy
+TeacherLiProxy *-- TeacherLi
+
+
+
+
+@enduml

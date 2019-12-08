@@ -1,0 +1,15 @@
+@startuml
+
+interface Teacher{
+    void teach();
+}
+
+Teacher <|.. TeacherLi
+
+class ProxyFactory{
+    Object target;     //聚合目标对象
+    getProxyInstance();//给目标对象创建一个代理对象
+}
+ProxyFactory *-- TeacherLi
+
+@enduml

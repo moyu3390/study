@@ -1,0 +1,17 @@
+@startuml
+
+interface MethodInterceptor
+
+class TeacherLi{
+    void teach();
+}
+class ProxyFactory{
+    Object target;     //聚合目标对象
+    getProxyInstance();//给目标对象创建一个代理对象
+    intercept();           //重写intercept方法实现目标对象方法的调用
+}
+MethodInterceptor <|.. ProxyFactory
+ProxyFactory *-- TeacherLi
+
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+
+class OrderContext{
+    -State state;
+    -ToBePayState toBePayState;
+    -PaidState paidState;
+    -DeliverGoodsState deliverGoodsState;
+    -GoodsToBeReceivedState goodsToBeReceivedState;
+    -GoodsReceivedState goodsReceivedState;
+    -SuccessState successState;
+}
+abstract class State{
+    void pay();
+    void deliverGoods();
+    void toBeReceive();
+    void receive();
+    void other();
+}
+class ToBePayState{
+    -OrderContext context
+}
+class PaidState{
+    -OrderContext context
+}
+class DeliverGoodsState{
+    -OrderContext context
+}
+class GoodsToBeReceivedState{
+    -OrderContext context
+}
+class GoodsReceivedState{
+    -OrderContext context
+}
+class SuccessState{
+    -OrderContext context
+}
+
+State <|-- ToBePayState
+State <|-- PaidState
+State <|-- DeliverGoodsState
+State <|-- GoodsToBeReceivedState
+State <|-- GoodsReceivedState
+State <|-- SuccessState
+'OrderContext o-- State
+
+OrderContext -- ToBePayState
+OrderContext -- PaidState
+OrderContext -- DeliverGoodsState
+OrderContext -- SuccessState
+OrderContext -- GoodsToBeReceivedState
+OrderContext -- GoodsReceivedState
+
+
+
+
+@enduml
