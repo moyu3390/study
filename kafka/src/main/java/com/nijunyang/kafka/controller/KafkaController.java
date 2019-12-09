@@ -23,6 +23,6 @@ public class KafkaController {
         User user = new User();
         user.setName(name);
         user.setAge(age);
-        kafkaTemplate.send("test-topic", 0, "key", JsonUtils.objectToJson(user));
+        kafkaTemplate.send("test-topic", 0, "key", JsonUtils.write2JsonString(user));
     }
 }

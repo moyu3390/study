@@ -34,7 +34,7 @@ public class KafkaJob {
     public void luzhouSyncPoint(List<String> consumerRecordList, Acknowledgment ack) throws IOException {
         System.out.println("消费消息");
         for (String str : consumerRecordList) {
-            User user = JsonUtils.jsonToObject(str, User.class);
+            User user = JsonUtils.readJson2Entity(str, User.class);
             System.out.println(user.getAge());
         }
         ack.acknowledge();
