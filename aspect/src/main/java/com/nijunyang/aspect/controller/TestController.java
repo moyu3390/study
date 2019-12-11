@@ -2,6 +2,7 @@ package com.nijunyang.aspect.controller;
 
 import com.nijunyang.aspect.annotation.AspectDef;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,8 @@ public class TestController {
         throw new RuntimeException();
     }
 
-    @GetMapping("/test/before")
-    public String testBefore(){
+    @GetMapping(value = {"/test/before/{param}","/test/before"})
+    public String testBefore(@PathVariable(required = false) String param){
         return "before";
     }
 
