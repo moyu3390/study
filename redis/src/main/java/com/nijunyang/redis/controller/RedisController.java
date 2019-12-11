@@ -40,11 +40,11 @@ public class RedisController {
         user.setName("张三");
         user.setAge(17);
         //第一个参数redisKey,第二个参数hashKey值(相当于Map的key),第三个参数data(相当于Map的value)
-        //如果要用对象的hashCode做key，建议重写hashCode，不然一样的数据不同的序列化方式还原的对象hash值不一样
-        hashOperations.put("hash:user:", user.createHashCode(), user);
+        //用对象的字段生成hashCode做key，如果直接用hashCode，可能会出现不然一样的数据不同的序列化方式还原的对象hash值不一样
+        hashOperations.put("hash:user", user.createHashCode(), user);
         //第一个参数redisKey,第二个参数hashKey值(相当于Map的key),返回的value
-        Object o = hashOperations.get("hash:user:", user.createHashCode());
-        redisService.expireKey("hash:user:", 100, TimeUnit.SECONDS);
+        Object o = hashOperations.get("hash:user", user.createHashCode());
+        redisService.expireKey("hash:user", 100, TimeUnit.SECONDS);
         System.out.println(o);
         return new ResponseEntity<>((User)o, HttpStatus.OK);
     }
