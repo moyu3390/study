@@ -44,7 +44,7 @@ public class RedPackageUtils {
              * 这样可能导致最后，最后剩余的那份相对而言多一点，最后再将整个集合重新洗牌shuffle
              */
             int shareMoney = (int) Math.floor(ratio * money);
-            // 最少1分钱
+            // 几率太小，总数太少，向下取整可能出现0,处理最少1分钱
             if (shareMoney == 0) {
                 shareMoney = 1;
             }

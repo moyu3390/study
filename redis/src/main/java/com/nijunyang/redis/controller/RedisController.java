@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -65,12 +66,22 @@ public class RedisController {
         return new ResponseEntity<>(length, HttpStatus.OK);
     }
 
-    @GetMapping("/add/redpackage")
-    public ResponseEntity<Long> addList(){
+    @GetMapping("/addList/pushall/{number}")
+    public ResponseEntity<Long> addList2(@PathVariable Integer number){
+        String[] redPackages = new String[number];
+        Arrays.fill(redPackages, "asc");
+        Long length = listOperations.leftPushAll("pushall", redPackages);
+        return new ResponseEntity<>(length, HttpStatus.OK);
+    }
 
-        //1000拆500万个红包
-        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(100_000_00), 500_000_0);
-        //leftPushAll(K var1, Collection<V> var2)  以一个集合形式存放 并不是单个元素存放
+    @GetMapping("/add/redpackage/{money}/{number}")
+    public ResponseEntity<Long> addRedPackage(@PathVariable Integer money, @PathVariable Integer number){
+
+        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(money), number);
+        /**
+         * leftPushAll(K var1, Collection<V> var2)  以一个集合形式存放 并不是单个元素存放
+         * leftPushAll(K var1, V... var2)  数组长度过大无法添加，会报IO异常，测试了下长度100万可以110万长度就会报错了
+         */
         String[] redPackages = new String[redPackageList.size()];
         for (int i = 0; i < redPackages.length; i++) {
             redPackages[i] = redPackageList.get(i).toString();
@@ -82,6 +93,9 @@ public class RedisController {
     @GetMapping("/share/redpackage")
     public ResponseEntity<Object> share(){
         Object money = listOperations.leftPop(SHARE_RED_PACKAGE_KEY);
+        if (money == null) {
+            return new ResponseEntity<>("红包已瓜分完毕", HttpStatus.OK);
+        }
         return new ResponseEntity<>(money, HttpStatus.OK);
     }
 
