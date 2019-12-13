@@ -23,7 +23,7 @@ public class RedPackageUtils {
             throw  new RuntimeException("每人至少一分钱.");
         }
         // 按分计算，钱转换成分
-        int money = moneyTotal.multiply(BigDecimal.valueOf(100)).intValue();
+        long money = moneyTotal.multiply(BigDecimal.valueOf(100)).longValue();
         //生成一个和人数一样的数组，分布随机数，然后计算随机数占比，根据对应占比分钱。
         double randomCount = 0;
         double[] randomArr = new double[number];
@@ -34,7 +34,7 @@ public class RedPackageUtils {
             randomCount += r;
         }
         // 根据每个随机数占比计算每份红包金额
-        int alreadyShare = 0;
+        long alreadyShare = 0;
         List<BigDecimal> moneyList = new ArrayList<>(number);
         for (int i = 0; i < number; i++) {
             // 每份占比
@@ -43,7 +43,7 @@ public class RedPackageUtils {
              * 向下取整，如果用round，可能导致多个向上舍入之后，最后还没分完，却没钱了，向下取整可以保证正能分完
              * 这样可能导致最后，最后剩余的那份相对而言多一点，最后再将整个集合重新洗牌shuffle
              */
-            int shareMoney = (int) Math.floor(ratio * money);
+            long shareMoney = (long) Math.floor(ratio * money);
             // 几率太小，总数太少，向下取整可能出现0,处理最少1分钱
             if (shareMoney == 0) {
                 shareMoney = 1;

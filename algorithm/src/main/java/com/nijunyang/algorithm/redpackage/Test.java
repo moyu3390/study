@@ -21,11 +21,11 @@ public class Test {
 //            }).start();
 //        }
         long start = System.currentTimeMillis();
-        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(100_000_00), 500_000_0);
+        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(100_000_000), 500_000_0);
         long end = System.currentTimeMillis();
         System.out.println(end - start);
 //        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(5), 500);
         System.out.println(redPackageList);
-//        System.out.println(redPackageList.stream().reduce(new BigDecimal(0), BigDecimal::add));
+        System.out.println(redPackageList.stream().reduce(new BigDecimal(0), BigDecimal::add));
     }
 }
