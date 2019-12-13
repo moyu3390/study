@@ -20,8 +20,12 @@ public class Test {
 //                System.out.println(randomMoney);
 //            }).start();
 //        }
-        List<BigDecimal> redPackageList = RedUtils.math(BigDecimal.valueOf(100_000_00), 100_000_0);
+        long start = System.currentTimeMillis();
+        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(100_000_00), 500_000_0);
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+//        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(5), 500);
         System.out.println(redPackageList);
-        System.out.println(redPackageList.stream().reduce(new BigDecimal(0), BigDecimal::add));
+//        System.out.println(redPackageList.stream().reduce(new BigDecimal(0), BigDecimal::add));
     }
 }

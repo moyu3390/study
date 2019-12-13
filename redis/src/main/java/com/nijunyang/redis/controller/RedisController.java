@@ -1,15 +1,20 @@
 package com.nijunyang.redis.controller;
 
+import com.nijunyang.algorithm.redpackage.RedPackageUtils;
 import com.nijunyang.redis.model.User;
 import com.nijunyang.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,11 +25,16 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/redis")
 public class RedisController {
 
+    private static final String SHARE_RED_PACKAGE_KEY = "shareRedPackage";
+
     @Autowired
     RedisService redisService;
 
     @Autowired
     HashOperations<String, String, Object> hashOperations;
+
+    @Autowired
+    ListOperations<String, Object> listOperations;
 
 
     @GetMapping("/count")
@@ -48,6 +58,34 @@ public class RedisController {
         System.out.println(o);
         return new ResponseEntity<>((User)o, HttpStatus.OK);
     }
+
+    @GetMapping("/addList/{value}")
+    public ResponseEntity<Long> addList1(@PathVariable String value){
+        Long length = listOperations.leftPush("list", value);
+        return new ResponseEntity<>(length, HttpStatus.OK);
+    }
+
+    @GetMapping("/add/redpackage")
+    public ResponseEntity<Long> addList(){
+
+        //1000拆500万个红包
+        List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(100_000_00), 500_000_0);
+        //leftPushAll(K var1, Collection<V> var2)  以一个集合形式存放 并不是单个元素存放
+        String[] redPackages = new String[redPackageList.size()];
+        for (int i = 0; i < redPackages.length; i++) {
+            redPackages[i] = redPackageList.get(i).toString();
+        }
+        Long length = listOperations.leftPushAll(SHARE_RED_PACKAGE_KEY, redPackages);
+        return new ResponseEntity<>(length, HttpStatus.OK);
+    }
+
+    @GetMapping("/share/redpackage")
+    public ResponseEntity<Object> share(){
+        Object money = listOperations.leftPop(SHARE_RED_PACKAGE_KEY);
+        return new ResponseEntity<>(money, HttpStatus.OK);
+    }
+
+
 
 
 }
