@@ -57,7 +57,7 @@ public class TestController {
         return testSecret2(user);
     }
 
-    @SensitiveMethod
+    @SensitiveMethod(decrypt = false)
     public User testSecret2(@SensitiveInfo User user){
         User a = user;
         return a;

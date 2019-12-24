@@ -377,7 +377,7 @@ public class CipherUtil {
         return new String(tmpByte, "utf-8");
     }
 
-    private static SecretKeySpec getKeySpec(String secret) throws GeneralSecurityException, UnsupportedEncodingException {
+    private static SecretKeySpec getKeySpec(String secret) throws UnsupportedEncodingException {
         byte[] raw = secret.getBytes("UTF-8");
         SecretKeySpec skeySpec = new SecretKeySpec(raw, TYPE);
 
