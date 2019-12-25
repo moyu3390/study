@@ -1,7 +1,4 @@
-# Getting Started
-
-### Reference Documentation
-For further reference, please consider the following sections:
-
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
+1.封装自己的RestTemplate   bootutil->resttemplate
+2.针对controller某个类型的异常统一处理  exception
+3.邮件发送   mail
 
