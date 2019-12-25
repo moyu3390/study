@@ -74,12 +74,12 @@ public class RedisController {
         return new ResponseEntity<>(length, HttpStatus.OK);
     }
 
-    @GetMapping("/add/redpackage/{money}/{number}")
-    public ResponseEntity<Long> addRedPackage(@PathVariable Integer money, @PathVariable Integer number){
+    @GetMapping("/push/redpackage/{money}/{number}")
+    public ResponseEntity<Long> pushRedPackage(@PathVariable Integer money, @PathVariable Integer number) {
 
         List<BigDecimal> redPackageList = RedPackageUtils.shareMoney(BigDecimal.valueOf(money), number);
         /**
-         * leftPushAll(K var1, Collection<V> var2)  以一个集合形式存放 并不是单个元素存放
+         * leftPushAll(K var1, Collection<V> var2)  以整个集合为一个元素形式存放 并不是单个元素存放
          * leftPushAll(K var1, V... var2)  数组长度过大无法添加，会报IO异常，测试了下长度100万可以110万长度就会报错了
          */
         String[] redPackages = new String[redPackageList.size()];
@@ -91,7 +91,7 @@ public class RedisController {
     }
 
     @GetMapping("/share/redpackage")
-    public ResponseEntity<Object> share(){
+    public ResponseEntity<Object> share() {
         Object money = listOperations.leftPop(SHARE_RED_PACKAGE_KEY);
         if (money == null) {
             return new ResponseEntity<>("红包已瓜分完毕", HttpStatus.OK);
