@@ -1,0 +1,14 @@
+package {{modelPackage}};
+import java.io.Serializable;
+import lombok.Data;
+{{#importList}}
+import {{{import}}};
+{{/importList}}
+
+@Data
+public class {{className}} implements Serializable{
+    {{#fieldList}}
+    private {{type}} {{field}};
+    {{/fieldList}}
+
+}
