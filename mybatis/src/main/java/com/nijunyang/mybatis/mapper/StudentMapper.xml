@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nijunyang.mybatis.mapper.StudentMapper">
+
+    <!-- 自定义结果映射 -->
+    <resultMap type="com.nijunyang.mybatis.model.Student" id="studentResult">
+        <id property="id" column="sid"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <resultMap type="com.nijunyang.mybatis.model.Student" id="studentWithTeacherResult" extends="studentResult">
+        <!-- 多表关联映射 -->
+        <collection property="teachers" ofType="com.nijunyang.mybatis.model.Teacher">
+            <id property="id" column="tid"/>
+            <!--查询语句中设置列别名t_name-->
+            <result property="name" column="t_name"/>
+        </collection>
+    </resultMap>
+    <select id="findStudentWithTeacher" parameterType="Integer" resultMap="studentWithTeacherResult">
+		select s.*,t.*, t.`name` t_name,st.* from student s, teacher t, student_teacher_relative st
+		where
+		st.tid=t.id
+		and st.sid = s.id
+		and t.id=#{tid}
+	</select>
+</mapper>

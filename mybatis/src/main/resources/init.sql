@@ -25,3 +25,50 @@ CREATE TABLE `film_actor` (
   KEY `idx_film_actor_id` (`film_id`,`actor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `film_actor` (`id`, `film_id`, `actor_id`) VALUES (1,1,1), (2,1,2),(3,2,1);
+
+-------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+INSERT INTO `student` VALUES ('1', '张三');
+INSERT INTO `student` VALUES ('2', '李四');
+INSERT INTO `student` VALUES ('3', '三年级');
+------------------
+DROP TABLE IF EXISTS `student_teacher_relative`;
+CREATE TABLE `student_teacher_relative` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) DEFAULT NULL,
+  `tid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+INSERT INTO `student_teacher_relative` VALUES ('1', '1', '1');
+INSERT INTO `student_teacher_relative` VALUES ('2', '2', '1');
+INSERT INTO `student_teacher_relative` VALUES ('3', '1', '3');
+INSERT INTO `student_teacher_relative` VALUES ('4', '2', '3');
+------------------
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+INSERT INTO `teacher` VALUES ('1', '李老师');
+INSERT INTO `teacher` VALUES ('2', '王老师');
+INSERT INTO `teacher` VALUES ('3', '张老师');
+------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(255) DEFAULT NULL,
+  `userCard` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+INSERT INTO `user` VALUES ('2', '王五', '5111292', '17', '成都');

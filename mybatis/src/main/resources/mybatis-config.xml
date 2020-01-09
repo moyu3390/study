@@ -5,7 +5,7 @@
 <configuration>
     <properties>
         <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbc.url" value="jdbc:mysql://127.0.0.1:3306/njytest"/>
+        <property name="jdbc.url" value="jdbc:mysql://111.229.53.45:3306/njy?useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="jdbc.username" value="root"/>
         <property name="jdbc.password" value="root"/>
     </properties>

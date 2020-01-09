@@ -1,0 +1,41 @@
+package com.nijunyang.mybatis.model;
+
+import java.util.List;
+
+/**
+ * Description: 
+ * Created by nijunyang on 2020/1/9 10:18
+ */
+public class Teacher {
+    private int id;
+    private String name;
+    private List<Student> students;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    @Override public String toString() {
+        return "Teacher{" + "id=" + id + ", name='" + name + '\'' + ", students=" + students + '}';
+    }
+}

@@ -6,11 +6,11 @@
 <mapper namespace="com.nijunyang.mybatis.mapper.UserMapper">
 
     <select id="selectByCard" resultType="com.nijunyang.mybatis.model.User">
-        select * from usertab  where usercard = #{card}
+        select * from user  where usercard = #{card}
     </select>
 
     <insert id="insertUser" parameterType="com.nijunyang.mybatis.model.User">
-        INSERT into  usertab (username,usercard, age, city) VALUES(#{userName},#{userCard},#{age},#{city});
+        INSERT into  user (username,usercard, age, city) VALUES(#{userName},#{userCard},#{age},#{city});
     </insert>
 
 </mapper>
