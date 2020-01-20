@@ -16,16 +16,10 @@ public class RestErrorResponse {
      */
     private String errorMsg;
 
-    /**
-     * 其他信息
-     */
-    private Object[] args;
-
-    public RestErrorResponse(Status status, Integer errorCode, String errorMsg, Object[] args) {
+    public RestErrorResponse(Status status, Integer errorCode, String errorMsg) {
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
         this.status = status;
-        this.args = args;
     }
 
     public Integer getErrorCode() {
@@ -48,7 +42,4 @@ public class RestErrorResponse {
         return status;
     }
 
-    public Object[] getArgs() {
-        return args;
-    }
 }
