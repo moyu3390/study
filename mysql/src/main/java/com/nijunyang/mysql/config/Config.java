@@ -16,10 +16,10 @@ import java.time.format.DateTimeFormatter;
  * Description:
  * Created by nijunyang on 2020/2/4 18:51
  */
-@Component
+//@Component
 public class Config {
 
-    @Bean
+//    @Bean
     public ObjectMapper serializingObjectMapper() {
         JavaTimeModule module = new JavaTimeModule();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
