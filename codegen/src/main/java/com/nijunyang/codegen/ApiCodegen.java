@@ -79,7 +79,7 @@ public class ApiCodegen extends DefaultGenerator {
 
     private String typeTransform(Property property) {
         Map<String, String> typeMap = config.typeMapping();
-        System.out.println(typeMap);
+//        System.out.println(typeMap);
         if ("integer".equals(property.getType()) && "int64".equals(property.getFormat()) ) {
             return "Long";
         }
@@ -92,6 +92,7 @@ public class ApiCodegen extends DefaultGenerator {
 
     //生成controller文件 同时生成service接口文件
     private void createController(Map<String, Path> pathMap) {
+        //应该为map 每个controller一个
         List<ApiDefinition> apiDefinitionList = new ArrayList<>();
         for (Map.Entry<String,Path> entry : pathMap.entrySet())
         {
