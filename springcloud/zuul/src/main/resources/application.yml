@@ -6,4 +6,17 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 server:
-  port: 8082
+  port: 8081
+#集成eureka只有默认按照服务名来路由
+zuul:
+  ignored-services: "*"  #不自动创建路由规则
+  routes:
+    order: /mypath/** #方式1：集成eureka之后也可以 服务名对应规则
+#    myorder:
+#      path: /mypath/**
+#      url: http://127.0.0.1:8082 #方式二 传统的路由配置指定服务器
+#      url: order                 #方式三集成eureka之后也可以指定协商服务名字，还可以自动实现默认的负载均衡
+#     /mypath/？  匹配单个字符 如/mypatha/a
+#     /mypath/*   匹配单个层级目录 如/mypatha/abc  无法匹配/mypatha/abc/def
+#     /mypath/**  匹配多级层级目录 如/mypatha/abc/def
+
