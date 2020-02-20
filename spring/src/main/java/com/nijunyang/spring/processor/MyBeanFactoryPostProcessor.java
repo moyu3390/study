@@ -1,4 +1,4 @@
-package com.nijunyang.spring;
+package com.nijunyang.spring.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;

@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @date:2019/10/6
  */
 @Configuration
-@ComponentScan(basePackages = "com.nijunyang.spring")
+@ComponentScan(basePackages = "com.nijunyang.spring.*")
 public class MainConfig {
 }

@@ -1,4 +1,4 @@
-package com.nijunyang.spring;
+package com.nijunyang.spring.processor;
 
 import com.nijunyang.spring.model.Student;
 import org.springframework.beans.BeansException;
