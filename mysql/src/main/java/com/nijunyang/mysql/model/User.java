@@ -2,8 +2,9 @@ package com.nijunyang.mysql.model;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.nijunyang.mysql.util.JsonUtils;
+import com.nijunyang.mysql.enums.Month;
+import com.nijunyang.mysql.enums.Week;
+import com.nijunyang.mysql.myclass.MyList;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ import java.time.Instant;
 @Schema
 public class User {
 
+    private int id;
     @Schema(description = "商城图片",example = "http://xxxxx")
     private String userName;
     @Schema(description = "商城图片",example = "http://xxxxx")
@@ -29,6 +31,11 @@ public class User {
     @JsonFormat(timezone = "GMT+8")
     @Schema(description = "开始时间",example = "yyyy-MM-dd HH:mm:ss")
     private Instant createTime;
+
+    private MyList<Week> cycle;
+
+    private MyList<Month> likeMonth;
+
 
     public static void main(String[] args){
         User user = new User();
