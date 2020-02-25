@@ -3,12 +3,11 @@ package com.nijunyang.spring.model;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author: create by nijunyang
- * @date:2019/10/6
+ * Description:
+ * Created by nijunyang on 2020/2/23 10:53
  */
-
-public class Student {
+public class Teacher {
 
     @Autowired
-    private Teacher teacher;
+    private Student student;
 }

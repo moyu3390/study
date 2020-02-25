@@ -12,5 +12,5 @@ public class MyListener implements ApplicationListener<MyApplicationEvent> {
     @Override
     public void onApplicationEvent(MyApplicationEvent event) {
         System.out.println("收到事件：" + event.toString());
-        }
-        }
+    }
+}

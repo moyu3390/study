@@ -1,10 +1,10 @@
 package com.nijunyang.spring;
 
+import com.nijunyang.spring.config.MainConfig;
 import com.nijunyang.spring.listener.MyApplicationEvent;
 import com.nijunyang.spring.model.Student;
-import org.springframework.boot.SpringApplication;
+import com.nijunyang.spring.model.Teacher;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 //@SpringBootApplication
 public class Application {
@@ -15,7 +15,10 @@ public class Application {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
 		context.publishEvent(new MyApplicationEvent("想涨工资"));
 		Student student = (Student) context.getBean("student");
+		Teacher teacher = (Teacher) context.getBean("teacher");
+//		Student student2 = (Student) context.getBean(Student.class);
 //		System.out.println(student.getClass());
+		int a = 0;
 	}
 
 }
