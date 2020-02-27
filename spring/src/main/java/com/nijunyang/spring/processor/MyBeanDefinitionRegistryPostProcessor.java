@@ -20,8 +20,8 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
         System.out.println("bean定义的数据量:"+registry.getBeanDefinitionCount());
         RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(Student.class);
         //注册一个名为student的bean定义进去
-        registry.registerBeanDefinition("student", rootBeanDefinition);
-        System.out.println("bean定义的数据量:"+registry.getBeanDefinitionCount());
+//        registry.registerBeanDefinition("student", rootBeanDefinition);
+//        System.out.println("bean定义的数据量:"+registry.getBeanDefinitionCount());
     }
 
     @Override

@@ -15,12 +15,12 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     //注册了bean定义之后调用，可以修改bean定义，比如把student设置成懒加载
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        for(String name : beanFactory.getBeanDefinitionNames()) {
-            if("student".equals(name)) {
-                BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
-                beanDefinition.setLazyInit(true);
-            }
-
-        }
+//        for(String name : beanFactory.getBeanDefinitionNames()) {
+//            if("student".equals(name)) {
+//                BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
+//                beanDefinition.setLazyInit(true);
+//            }
+//
+//        }
     }
 }

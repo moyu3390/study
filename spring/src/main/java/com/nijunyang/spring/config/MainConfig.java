@@ -6,6 +6,7 @@ import com.nijunyang.spring.model.Teacher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author: create by nijunyang
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = "com.nijunyang.spring.*")
+@EnableAspectJAutoProxy()
 public class MainConfig {
 
     @Bean
