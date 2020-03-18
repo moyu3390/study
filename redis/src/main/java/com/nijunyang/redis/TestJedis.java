@@ -19,7 +19,7 @@ public class TestJedis {
     {
         //redis安装在docker容器中，映射到宿主机的端口，host直接127.0.0.1即可
 //        Jedis jedis = new Jedis("127.0.0.1",6379);
-        Jedis jedis = new Jedis("192.168.1.66",6379);
+        Jedis jedis = new Jedis("111.229.53.45",6379);
 
         //set 字符串
         jedis.set("name", "xiaohuaasdasd1212121");
