@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Description:
- * Created by nijunyang on 2020/3/31 21:49
+ * Created by nijunyang on 2020/3/30 21:49
  */
 public class Test {
 
@@ -13,34 +13,38 @@ public class Test {
         int result = yuesefuhuan_link(70866, 116922);
         long end = System.currentTimeMillis();
         System.out.println(result);
-        System.out.println(end - start);
+        System.out.println("链表耗时：" + (end - start));
         System.out.println("-------------------------");
 
         start = System.currentTimeMillis();
         result = yuesefuhuan_arr(70866, 116922);
         end = System.currentTimeMillis();
         System.out.println(result);
-        System.out.println(end - start);
+        System.out.println("数组耗时：" + (end - start));
     }
 
+    /**
+     * 数组约瑟夫环
+     */
     public static int yuesefuhuan_arr(int n, int m) {
-        ArrayList<Integer> list = new ArrayList<>(n);
-        for (int i = 0; i < n; i++) {
+        int size = n;
+        ArrayList<Integer> list = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
             list.add(i);
         }
         int index = 0;
-        while (n > 1) {
+        while (size > 1) {
             //取模可以回到起点
-            index = (index + m - 1) % n;
+            index = (index + m - 1) % size;
             list.remove(index);
-            n--;
+            size--;
         }
         return list.get(0);
     }
 
 
     /**
-     * 约瑟夫环，循环连表力扣超时
+     * 循环链表约瑟夫环力扣超时
      * @param n
      * @param m
      * @return
@@ -87,10 +91,8 @@ public class Test {
     static class Node<E>{
         E value;
         Node next;
-
         public Node() {
         }
-
         public Node(E value) {
             this.value = value;
         }
