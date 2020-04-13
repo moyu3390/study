@@ -11,12 +11,9 @@ public class Sort {
 
     public static void main(String[] args){
 
-//        int[] arr = {5,8,9,6,7,3,1,4};
-//        printArr(arr);
-//        insertSort(arr);
-//        printArr(arr);
         int[] arr = {5,8,9,6,6,9,7,2,6,45,98,78};
-//        mergeSort(arr,0, arr.length - 1);
+//        insertSort(arr);
+//        mergeSort(arr, 0, arr.length - 1);
 //        bubbleSort(arr);
 //        selectionSort(arr);
         shellSort(arr);
@@ -152,11 +149,4 @@ public class Sort {
         }
     }
 
-    public static void printArr(int[] arr) {
-        for (int a : arr) {
-            System.out.print(a);
-            System.out.print(",");
-        }
-        System.out.println();
-    }
 }
