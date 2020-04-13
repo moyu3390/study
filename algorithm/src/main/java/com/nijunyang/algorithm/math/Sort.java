@@ -16,7 +16,9 @@ public class Sort {
 //        insertSort(arr);
 //        printArr(arr);
         int[] arr = {5,8,9,6};
-        mergeSort(arr,0, arr.length - 1);
+//        mergeSort(arr,0, arr.length - 1);
+//        bubbleSort(arr);
+        selectionSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -42,6 +44,45 @@ public class Sort {
 
     public static void shellSort(int[] arr) {
 
+    }
+
+    /**
+     * 冒泡排序 稳定  依次比较相邻的两个元素大小，每轮结束就可以选出来一个最大或者最小的
+     * @param arr
+     */
+    public static void bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {  //外层循环控制轮次
+            for (int j = 0; j < arr.length - 1 - i; j++) { //内层循环次数越来越少，因为内层跑完一次就找到一个数
+                if (arr[j] > arr[j+1]) { //交换位置
+                    arr[j] = arr[j] + arr[j+1];
+                    arr[j+1] = arr[j] - arr[j+1];
+                    arr[j] = arr[j] - arr[j+1];
+                }
+            }
+
+        }
+    }
+
+    /**
+     * 选择排序 不稳定 先拿出一个数，去依次遍历，找到最大或者最小的。每轮换一次位置，冒泡是每次比较都可能会换位置。
+     * @param arr
+     */
+    public static void selectionSort(int[] arr) {
+        int tempIndex;
+        for (int i = 0; i < arr.length; i++) {
+            tempIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[tempIndex]) {   //比较大小 记录下标位置
+                    tempIndex = j;
+                }
+            }
+            if (tempIndex != i) {  //交换位置
+                arr[i] = arr[i] + arr[tempIndex];
+                arr[tempIndex] = arr[i] - arr[tempIndex];
+                arr[i] = arr[i] - arr[tempIndex];
+            }
+
+        }
     }
 
 
