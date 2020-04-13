@@ -15,10 +15,11 @@ public class Sort {
 //        printArr(arr);
 //        insertSort(arr);
 //        printArr(arr);
-        int[] arr = {5,8,9,6};
+        int[] arr = {5,8,9,6,6,9,7,2,6,45,98,78};
 //        mergeSort(arr,0, arr.length - 1);
 //        bubbleSort(arr);
-        selectionSort(arr);
+//        selectionSort(arr);
+        shellSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -43,6 +44,24 @@ public class Sort {
     }
 
     public static void shellSort(int[] arr) {
+        int len = arr.length;
+        //增量每次折半,最后增量为1的时候就是最后一次排序
+        for (int increment = len / 2; increment >= 1; increment /= 2) {
+            //类似插入排序
+            for (int i = increment; i < len; i++) {  //按增量分开使用插入排序
+                int data = arr[i];
+                for (int j = i - increment; j >= 0 ; j -= increment) {
+                    if (arr[j] > data) {
+                        arr[j + increment] = arr[j]; //位置后移
+                        arr[j] = data;
+                    }
+                    else {
+                        break; // 前面都是排好序的，有一个比它小的，再前面肯定更小，直接可以跳出，不用再比较
+                    }
+                }
+            }
+
+        }
 
     }
 
