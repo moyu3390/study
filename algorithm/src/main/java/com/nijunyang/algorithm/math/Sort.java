@@ -11,13 +11,16 @@ public class Sort {
 
     public static void main(String[] args){
 
-        int[] arr = {5,8,9,6,6,9,7,2,6,45,98,78};
+//        int[] arr = {5,8,9,6,6,9,7,2,6,45,98,78};
+        int[] arr = {9,5,6,8,0,3,7,1};
 //        insertSort(arr);
 //        mergeSort(arr, 0, arr.length - 1);
 //        bubbleSort(arr);
 //        selectionSort(arr);
-        shellSort(arr);
+//        shellSort(arr);
+        quicklySort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
+
     }
 
     /**
@@ -117,36 +120,83 @@ public class Sort {
             merge(arr,  left, mid, right);       //合并
         }
     }
-
     /**
      * 归并
      */
     private static void merge(int[] arr, int left, int mid, int right) {
-        int temp[] = new int[arr.length];
-
-        int point1 = left;
-        int point2 = mid + 1;
-
-        int loc = left;
-        while(point1 <= mid && point2 <= right){
-            if (arr[point1] < arr[point2]) {
-                temp[loc] = arr[point1];
-                point1++;
+        int[] arrTemp = new int[arr.length];
+        int leftPoint = left;         //左边第一个下标
+        int rightPoint = mid + 1;     //右边第一个下标
+        int currentPoint = left;      //当前下标
+        //左右两边的数据对于自己来说都已经是有序的，所以就拿右边的依次和左边的进行大小比较，将对应的大小关系放入临时数组对应下标
+        //左边指针走到mid位置或者右边指针走到right位置，既结束循环，两边剩下的有序数据，直接追加在临时数组后面，先左后右
+        while (leftPoint <= mid && rightPoint <= right) {
+            if (arr[leftPoint] < arr[rightPoint]) {
+                arrTemp[currentPoint] = arr[leftPoint];
+                leftPoint++;
             } else {
-                temp[loc] = arr[point2];
-                point2++;
+                arrTemp[currentPoint] = arr[rightPoint];
+                rightPoint++;
             }
-            loc++;
+            currentPoint++;
         }
-        while(point1 <= mid){
-            temp[loc ++] = arr[point1 ++];
+        //先处理左边剩下的直接放入对应位置
+        while (leftPoint <= mid) {
+            arrTemp[currentPoint++] = arr[leftPoint++];
         }
-        while(point2 <= right){
-            temp[loc ++] = arr[point2 ++];
+        //再处理右边剩下的
+        while (rightPoint <= right) {
+            arrTemp[currentPoint++] = arr[rightPoint++];
         }
-        for(int i = left ; i <= right ; i++){
-            arr[i] = temp[i];
+        //将临时数组里面的数据放入原始数组中，注意只放merge的那一段的数据
+        for (int i = left; i <= right; i++) {
+            arr[i] = arrTemp[i];
         }
+    }
+
+    /**
+     * 快速排序
+     * @param arr
+     */
+    private static void quicklySort(int[] arr, int left, int right) {
+        int base = arr[left];  //我们选第一个作为基准数,也就是每次的进来left下标
+        int leftPoint = left;       //左边找的位置
+        int rightPoint = right;     //右边找的位置
+        while (leftPoint < rightPoint) {  //左边指针小于右边 说明还没碰到一起
+
+            //从后往前找 如果后面的数大于等于基准数不交换，指针前移，需要的交换的时候跳出循环
+            while (leftPoint < rightPoint && arr[rightPoint] >= base) {
+                rightPoint--;
+            }
+            //上述循环跳出，并且左边指针小于右边指针 说明需要交换数据，左边因为换一个小的数据过去所以指针后移
+            if (leftPoint < rightPoint) {
+                int temp = arr[rightPoint];
+                arr[rightPoint] = arr[leftPoint];
+                arr[leftPoint] = temp;
+                leftPoint++;
+            }
+
+            //切换 从前往后找 如果左边的数小于等于基准数不交换，指针后移，需要的交换的时候跳出循环
+            while (leftPoint < rightPoint && arr[leftPoint] <= base) {
+                leftPoint++;
+            }
+            //上述循环跳出，并且左边指针小于右边指针 说明需要交换数据，右边因为换了一个大的数据过去所以指针前移
+            if (leftPoint < rightPoint) {
+                int temp = arr[rightPoint];
+                arr[rightPoint] = arr[leftPoint];
+                arr[leftPoint] = temp;
+                rightPoint--;
+            }
+        }
+        if (left < leftPoint) {
+            //左边
+            quicklySort(arr, left, leftPoint - 1);
+        }
+        if (leftPoint < right) {
+            //右边
+            quicklySort(arr, leftPoint + 1, right);
+        }
+
     }
 
 }
