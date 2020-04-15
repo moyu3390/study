@@ -35,27 +35,37 @@ public class LockController {
     public String deductStock() {
         String uuid = UUID.randomUUID().toString();
         try {
-            //设置值，并且设置超时时间
-            boolean getLock = valueOperations.setIfAbsent(lockKey, uuid, 10, TimeUnit.SECONDS);
-//            boolean getLock = valueOperations.setIfAbsent(lock, 1);
-            if (!getLock) {
-                return "没有获取到锁";
-            }
+            lock(uuid);
             //使用当做数据库，只是模拟扣减库存场景，因此不使用原子操作
             Integer quantity = (Integer) valueOperations.get(quantityKey);
-            if (quantity > 0) {
-                --quantity;
-                valueOperations.set(quantityKey, quantity);
-                System.out.println("扣减库存成功,剩余库存： " + quantity);
-            } else {
-                System.out.println("扣减库存成功,剩余库存： " + quantity);
+            if (quantity != null) {
+                if (quantity > 0) {
+                    --quantity;
+                    valueOperations.set(quantityKey, quantity);
+                    System.out.println("扣减库存成功,剩余库存： " + quantity);
+                } else {
+                    System.out.println("扣减库存成功,剩余库存： " + quantity);
+                }
             }
-            return "true";
+            return "剩余库存： " + quantity;
         } finally {
-            //删除之前判断是否是自己加的锁
-            if (uuid.equals(valueOperations.get(lockKey))) {
-                redisTemplate.delete(lockKey);
+            unlock(uuid);
+        }
+    }
+
+    private void lock(String uuid) {
+        for (;;) {
+            boolean getLock = valueOperations.setIfAbsent(lockKey, uuid, 100, TimeUnit.SECONDS);
+            if (getLock) {
+                break;
             }
+        }
+    }
+
+    private void unlock(String uuid) {
+        //删除之前判断是否是自己加的锁
+        if (uuid.equals(valueOperations.get(lockKey))) {
+            redisTemplate.delete(lockKey);
         }
     }
 

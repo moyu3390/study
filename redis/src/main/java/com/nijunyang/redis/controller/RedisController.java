@@ -6,6 +6,7 @@ import com.nijunyang.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,16 @@ public class RedisController {
     @Autowired
     ListOperations<String, Object> listOperations;
 
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
+
+
+
+    @GetMapping("/count1")
+    public ResponseEntity<Long> count1(){
+        Long count = redisService.getCount();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
 
     @GetMapping("/count")
     public ResponseEntity<Long> count(){
