@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -108,6 +110,18 @@ public class RedisController {
             return new ResponseEntity<>("红包已瓜分完毕", HttpStatus.OK);
         }
         return new ResponseEntity<>(money, HttpStatus.OK);
+    }
+
+    @GetMapping("/set")
+    public ResponseEntity<Object> addSet() {
+        SetOperations setOperations = redisTemplate.opsForSet();
+        User stu1 = new User("zhansgan", 18);
+        User stu2 = new User("zhansgan", 18);
+        setOperations.add("setkey", stu1);
+        System.out.println(setOperations.isMember("setkey", stu2));
+        setOperations.add("setkey", stu2);
+        Set set = setOperations.members("setkey");
+        return ResponseEntity.ok(set);
     }
 
 

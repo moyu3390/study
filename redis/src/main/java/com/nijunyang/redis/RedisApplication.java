@@ -17,7 +17,7 @@ public class RedisApplication {
 	public Redisson redisson() {
 		Config config = new Config();
 
-		config.useSingleServer().setAddress("redis://111.229.53.45:6379").setPassword("root");
+		config.useSingleServer().setAddress("redis://111.229.53.45:6379").setPassword("Wbqsphr.1114redis");
 
 		/**
 		 * 哨兵

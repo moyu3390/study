@@ -1,6 +1,7 @@
 package com.nijunyang.redis.model;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +12,21 @@ import java.util.Objects;
  * Description:
  * Created by nijunyang on 2019/12/11 13:58
  */
-@Getter
-@Setter
+@Data
 public class User implements Serializable {
 
     private static final long serialVersionUID = 3323913441148295446L;
     private int id;
     private String name;
     private int age;
+
+    public User() {
+    }
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
     public int getId() {
         return id;
