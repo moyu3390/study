@@ -6,7 +6,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Component;
 
 /**
- * Description:
+ * Description: key过期事件监听
  * Created by nijunyang on 2020/4/10 15:37
  */
 @Component

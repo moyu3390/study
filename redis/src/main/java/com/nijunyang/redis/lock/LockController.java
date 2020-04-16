@@ -5,9 +5,12 @@ import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +33,11 @@ public class LockController {
     String lockKey = "lockKey";
 
     String quantityKey = "quantity";
+
+    @GetMapping("/test")
+    public ResponseEntity<Object> test(HttpServletRequest request) {
+        return ResponseEntity.ok(request.getRemoteHost() + ":" + request.getRemoteAddr());
+    }
 
     @GetMapping("/deduct-stock")
     public String deductStock() {
