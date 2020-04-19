@@ -1,6 +1,7 @@
 package com.nijunyang.algorithm.tree;
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -20,7 +21,7 @@ public final class TreeUtil {
      * @return
      */
     public static <T> TreeNode<T> createBinaryTree(LinkedList<T> dataList) {
-        TreeNode node = null;
+        TreeNode<T> node = null;
         if (dataList == null || dataList.isEmpty()) {
             return null;
         }
@@ -31,18 +32,18 @@ public final class TreeUtil {
             node.setRightChild((createBinaryTree(dataList)));
         }
         return node;
-
     }
 
     /**
-     * 前序遍历 跟 左子树 右子树
+     * 前序遍历 根 左子树 右子树
      * @param node
      */
-    public static void preOrderTraversal(TreeNode node) {
+    public static<T> void preOrderTraversal(TreeNode<T> node) {
         if(node == null){
             return;
         }
-        System.out.println(node.getData());
+        //遇根先输出，再去找左右
+        System.out.print(node.getData());
         preOrderTraversal(node.getLeftChild());
         preOrderTraversal(node.getRightChild());
     }
@@ -51,12 +52,13 @@ public final class TreeUtil {
      * 二叉树中序遍历 左子树 根 右子树
      * @param node   二叉树节点
      */
-    public static void inOrderTraversal(TreeNode node){
+    public static<T> void inOrderTraversal(TreeNode<T> node){
         if(node == null){
             return;
         }
+        //先找左再输出根,再去找右
         inOrderTraversal(node.getLeftChild());
-        System.out.println(node.getData());
+        System.out.print(node.getData());
         inOrderTraversal(node.getRightChild());
     }
 
@@ -64,26 +66,27 @@ public final class TreeUtil {
      * 二叉树后序遍历  左子树 右子树 根
      * @param node   二叉树节点
      */
-    public static void postOrderTraversal(TreeNode node){
+    public static<T> void postOrderTraversal(TreeNode<T> node){
         if(node == null){
             return;
         }
+        //先找左右，最后输出根
         postOrderTraversal(node.getLeftChild());
         postOrderTraversal(node.getRightChild());
-        System.out.println(node.getData());
+        System.out.print(node.getData());
     }
 
     /**
-     * 利用栈遍历二叉树
+     * 利用栈前序遍历二叉树
      * @param root
      */
-    public static void preOrderTraversalByStack(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode node = root;
+    public static <T> void preOrderTraversalByStack(TreeNode<T> root) {
+        Stack<TreeNode<T>> stack = new Stack<>();
+        TreeNode<T> node = root;
         while(node != null || !stack.isEmpty()) {
             //节点不为空，遍历节点，并入栈用于回溯
             while(node != null) {
-                System.out.println(node.getData());
+                System.out.print(node.getData());
                 stack.push(node);
                 node = node.getLeftChild();
             }
@@ -93,6 +96,21 @@ public final class TreeUtil {
                 node = node.getRightChild();
             }
         }
+    }
 
+    public static <T> void levelOrder(TreeNode<T> root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);  //入队
+        while (!queue.isEmpty()) {
+            TreeNode<T> node = queue.poll(); //取出
+            if (node != null) {
+                System.out.print(node.getData());
+                queue.offer(node.getLeftChild());   //左孩子入队
+                queue.offer(node.getRightChild());  //右孩子入队
+            }
+        }
     }
 }

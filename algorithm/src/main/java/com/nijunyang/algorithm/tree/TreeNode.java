@@ -6,8 +6,8 @@ package com.nijunyang.algorithm.tree;
  */
 public class TreeNode<T> {
     private T data;
-    private TreeNode leftChild;
-    private TreeNode rightChild;
+    private TreeNode<T> leftChild;
+    private TreeNode<T> rightChild;
 
     public TreeNode() {
     }
@@ -24,19 +24,19 @@ public class TreeNode<T> {
         this.data = data;
     }
 
-    public TreeNode getLeftChild() {
+    public TreeNode<T> getLeftChild() {
         return leftChild;
     }
 
-    public void setLeftChild(TreeNode leftChild) {
+    public void setLeftChild(TreeNode<T> leftChild) {
         this.leftChild = leftChild;
     }
 
-    public TreeNode getRightChild() {
+    public TreeNode<T> getRightChild() {
         return rightChild;
     }
 
-    public void setRightChild(TreeNode rightChild) {
+    public void setRightChild(TreeNode<T> rightChild) {
         this.rightChild = rightChild;
     }
 }
