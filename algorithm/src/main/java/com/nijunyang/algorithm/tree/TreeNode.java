@@ -5,9 +5,9 @@ package com.nijunyang.algorithm.tree;
  * @date:2019/7/28
  */
 public class TreeNode<T> {
-    private T data;
-    private TreeNode<T> leftChild;
-    private TreeNode<T> rightChild;
+    protected T data;
+    protected TreeNode<T> leftChild;
+    protected TreeNode<T> rightChild;
 
     public TreeNode() {
     }
