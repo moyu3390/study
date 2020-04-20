@@ -27,11 +27,12 @@ public class BinarySearchTree<T extends Comparable<T>> extends TreeNode<T> {
         BinarySearchTree.insert(binarySearchTree, 0);
         TreeUtil.inOrderTraversal(binarySearchTree);
         System.out.println();
+        TreeUtil.levelOrder(binarySearchTree);
+        System.out.println();
         BinarySearchTree<Integer> integerBinarySearchTree = BinarySearchTree.find(binarySearchTree, 9, new RefObject<>());
         delete(binarySearchTree, 8);
         delete(binarySearchTree, 7);
         TreeUtil.inOrderTraversal(binarySearchTree);
-//        System.out.println(integerBinarySearchTree.data);
     }
 
     /**
@@ -75,19 +76,18 @@ public class BinarySearchTree<T extends Comparable<T>> extends TreeNode<T> {
             if (root.rightChild != null) {
                 return find(root.rightChild, data, parent);
             }
-            return null;
         } else {
             if (root.leftChild != null) {
                 return find(root.leftChild, data, parent);
             }
-            return null;
         }
+        return null;
     }
 
     /**
      * 查询最大数据
      * @param root
-     * @param parentRef  最大结点的父结点引用
+     * @param parentRef  返回结果的父结点包装
      * @param <T>
      * @return
      */
@@ -103,7 +103,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends TreeNode<T> {
     /**
      * 查询最小数据
      * @param root
-     * @param parentRef 最小结点的父结点引用
+     * @param parentRef 返回结果的父结点包装
      * @param <T>
      * @return
      */
@@ -123,12 +123,12 @@ public class BinarySearchTree<T extends Comparable<T>> extends TreeNode<T> {
      * @param <T>
      * @return
      */
-    public static <T extends Comparable<T>> boolean delete(BinarySearchTree<T> root, T data) {
+    public static <T extends Comparable<T>> void delete(BinarySearchTree<T> root, T data) {
 
         RefObject<BinarySearchTree<T>> parentRef = new RefObject<>();
         BinarySearchTree<T> delBinarySearchTree = find(root, data, parentRef);
         if (delBinarySearchTree == null) {
-            return false;
+            return;
         }
         /**
          * 二叉搜索树结点的删除分三种情况：
@@ -215,7 +215,6 @@ public class BinarySearchTree<T extends Comparable<T>> extends TreeNode<T> {
                 parent.leftChild = child;
             }
         }
-        return true;
     }
 
 

@@ -38,7 +38,7 @@ public final class TreeUtil {
      * 前序遍历 根 左子树 右子树
      * @param node
      */
-    public static<T> void preOrderTraversal(TreeNode<T> node) {
+    public static<N extends TreeNode<T>, T> void preOrderTraversal(N node) {
         if(node == null){
             return;
         }
@@ -52,7 +52,7 @@ public final class TreeUtil {
      * 二叉树中序遍历 左子树 根 右子树
      * @param node   二叉树节点
      */
-    public static<T> void inOrderTraversal(TreeNode<T> node){
+    public static<N extends TreeNode<T>, T> void inOrderTraversal(N node){
         if(node == null){
             return;
         }
@@ -66,7 +66,7 @@ public final class TreeUtil {
      * 二叉树后序遍历  左子树 右子树 根
      * @param node   二叉树节点
      */
-    public static<T> void postOrderTraversal(TreeNode<T> node){
+    public static<N extends TreeNode<T>, T> void postOrderTraversal(N node){
         if(node == null){
             return;
         }
@@ -80,7 +80,7 @@ public final class TreeUtil {
      * 利用栈前序遍历二叉树
      * @param root
      */
-    public static <T> void preOrderTraversalByStack(TreeNode<T> root) {
+    public static <N extends TreeNode<T>, T> void preOrderTraversalByStack(N root) {
         Stack<TreeNode<T>> stack = new Stack<>();
         TreeNode<T> node = root;
         while(node != null || !stack.isEmpty()) {
@@ -98,7 +98,12 @@ public final class TreeUtil {
         }
     }
 
-    public static <T> void levelOrder(TreeNode<T> root) {
+    /**
+     * 层次遍历
+     * @param root
+     * @param <T>
+     */
+    public static <N extends TreeNode<T>, T> void levelOrder(N root) {
         if (root == null) {
             return;
         }
