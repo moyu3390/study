@@ -3,6 +3,7 @@ package com.nijunyang.mockito.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.stubbing.OngoingStubbing;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
@@ -16,11 +17,11 @@ import static org.junit.Assert.*;
  * Description:
  * Created by nijunyang on 2020/4/16 15:10
  */
-//@RunWith(PowerMockRunner.class)
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@RunWith(PowerMockRunner.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 @PrepareForTest({MyService.class})
-@SuppressStaticInitializationFor({"com.nijunyang.mockito.service.MyService"}) //阻止静态代码块执行
+//@SuppressStaticInitializationFor({"com.nijunyang.mockito.service.MyService"}) //阻止静态代码块执行
 public class MyServiceTest {
 
     MyService myService;
@@ -32,5 +33,10 @@ public class MyServiceTest {
 
     @Test
     public void test1() {
+        PowerMockito.when(myService.test1()).thenReturn("abc");
+//        PowerMockito.doNothing(myService.test1());
+        String s = myService.test1();
+        System.out.println(s);
+
     }
 }
