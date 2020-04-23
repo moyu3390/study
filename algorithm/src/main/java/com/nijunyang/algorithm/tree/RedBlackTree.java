@@ -2,7 +2,7 @@ package com.nijunyang.algorithm.tree;
 
 /**
  * Description: 红黑树
- * Created by nijunyang on 2020/4/22 15:23
+ * Created by nijunyang on 2020/4/20 20:23
  *
  * 红黑树的性质：
  *         1.每个结点不是红色就是黑色
@@ -92,10 +92,6 @@ public class RedBlackTree {
          * 3.右旋：条件：当前结点父结点是红色，叔叔是黑色，且当前结点是左子树。进行右旋：
          * 父结点变成黑色，爷爷变成红色，以太爷爷为点右旋。将其左孩子的右子树变成其左子树，将当前结点变成其左孩子的右子树。其做孩子填补当前位置
          *
-         * 总的来说 这里面几个关键操作结点指针变化，
-         * 首先进来先判断是否需要变色，当前操作结点就是新插入的这个元素的结点，变色完成之后，将操作结点变成其爷爷结点
-         * 左旋时将指针再指向父结点，基于新的这个操作结点进行操作
-         * 右旋时将指针再指向爷爷结点，基于新的这个操作结点进行操作
          */
         Node<T> currentNode = node;
         while (!currentNode.parent.black) {
