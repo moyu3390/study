@@ -58,7 +58,9 @@ public final class TreeUtil {
         }
         //先找左再输出根,再去找右
         inOrderTraversal(node.getLeftChild());
-        System.out.print(node.getData());
+        if (node.getData() != null) {
+            System.out.print(node.getData());
+        }
         inOrderTraversal(node.getRightChild());
     }
 

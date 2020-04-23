@@ -16,10 +16,26 @@ public class RedBlackTree {
 
     private Node root = Node.nil;
 
+    public static void main(String[] args){
+        RedBlackTree redBlackTree = new RedBlackTree();
+        //19,5,30,1,12,35,7,13,6
+        redBlackTree.insert(19);
+        redBlackTree.insert(5);
+        redBlackTree.insert(30);
+        redBlackTree.insert(1);
+        redBlackTree.insert(12);
+        redBlackTree.insert(35);
+        redBlackTree.insert(7);
+        redBlackTree.insert(13);
+        redBlackTree.insert(6);
+        RedBlackTree.inOrderTraversal(redBlackTree);
+
+    }
+
     public <T extends Comparable<T>> void insert(T data){
         Node<T> temp = root;
         Node<T> node = new Node<>(data);
-        if (root == null) {
+        if (root == Node.nil) {
             root = node;
         }
         else {
@@ -54,7 +70,10 @@ public class RedBlackTree {
             fixTree(node);
 
         }
+    }
 
+    private static void inOrderTraversal(RedBlackTree redBlackTree) {
+        TreeUtil.inOrderTraversal(redBlackTree.root);
     }
 
     /**
@@ -66,23 +85,24 @@ public class RedBlackTree {
         /**
          * 1.变色 条件：父结点及叔叔结点都是红色，变色过程：把父结点和叔叔结点都变成黑色，把爷爷设置成红色，指针指向爷爷结点
          * 2.左旋：上一步将指针指向了爷爷结点.条件：当前结点（爷爷结点）父结点是红色，叔叔是黑色，且当前结点是右子树。进行左旋：
-         * 临时指针指向父结点，将其父结点（指针变化前的爷爷）变成当前结点的左子树，将其原来的左子树变成其原来父结点的右子树，
+         * 临时指针指向父结点，将当前结点（变色前结点的太爷爷）右孩子的左孩子变成其右孩子，当前结点变成其右孩子的左孩子，
+         * 其右孩子填补当前结点位置
          *
-         * 3.右旋：上一步将指针指向了父结点，条件：当前结点（父结点，相对左旋来说）父结点是红色，叔叔是黑色，且当前结点是左子树。进行右旋：
-         * 父结点变成黑色，爷爷变成红色，以爷爷为点右旋。指针指向爷爷结点。将当前结点（爷爷结点）的父结点变成其右子树，其右子树变成其父的左子树
+         * 3.右旋：条件：当前结点父结点是红色，叔叔是黑色，且当前结点是左子树。进行右旋：
+         * 父结点变成黑色，爷爷变成红色，以太爷爷为点右旋。将其左孩子的右子树变成其左子树，将当前结点变成其左孩子的右子树。其做孩子填补当前位置
          *
          * 总的来说 这里面几个关键操作结点指针变化，
          * 首先进来先判断是否需要变色，当前操作结点就是新插入的这个元素的结点，变色完成之后，将操作结点变成其爷爷结点
-         * 左旋是基于新的这个操作结点进行操作，左旋完成之后又将操作结点变成它的父亲结点
-         * 右旋又是基于左旋后更新了的操作结点进行操作
+         * 左旋时将指针再指向父结点，基于新的这个操作结点进行操作
+         * 右旋时将指针再指向爷爷结点，基于新的这个操作结点进行操作
          */
         Node<T> currentNode = node;
-        while (!currentNode.parent.black) {
-            Node<T> temp = Node.nil;
+        while (currentNode.parent != null && !currentNode.parent.black) {
+            Node<T> temp;
             if (currentNode.parent == currentNode.parent.parent.leftChild) { //当前父结点是左孩子
                 temp = currentNode.parent.parent.rightChild; //叔叔结点
                 //变色
-                if (temp != Node.nil && !temp.black) { //叔叔也是红色，将父和叔叔都变黑色
+                if (temp != null && temp != Node.nil && !temp.black) { //叔叔也是红色，将父和叔叔都变黑色
                     currentNode.parent.black = true;
                     temp.black = true;
                     currentNode.parent.parent.black = false; //爷爷变成红色
@@ -91,48 +111,106 @@ public class RedBlackTree {
                 }
                 if (currentNode == currentNode.parent.rightChild) { //当前结点是右子树
                     currentNode = currentNode.parent; //以其父结点进行左旋
+                    //左旋
                     leftRotate(currentNode);
                 }
-
+                //右旋
+                //父结点变成黑色，爷爷变成红色,准备右旋
+                node.parent.black = true;
+                node.parent.parent.black = false;
+                //指针指向太爷爷去右旋
+                currentNode = node.parent.parent;
+                rightRotate(currentNode);
             }
             else { //当前父结点是右孩子
-
+                temp = currentNode.parent.parent.leftChild;
+                if (temp != null && temp != Node.nil && !temp.black) {
+                    currentNode.parent.black = true;
+                    temp.black = true;
+                    currentNode.parent.parent.black = false;
+                    currentNode = currentNode.parent.parent;
+                    continue;
+                }
+                if (currentNode == currentNode.parent.leftChild) {
+                    currentNode = currentNode.parent;
+                    rightRotate(currentNode);
+                }
+                //父结点变成黑色，爷爷变成红色,准备左旋
+                node.parent.black = true;
+                node.parent.parent.black = false;
+                //指针指向太爷爷去左旋
+                currentNode = node.parent.parent;
+                leftRotate(currentNode);
             }
-
-
         }
     }
 
     /**
-     * 左旋：将其父结点变成当前结点的左子树，将其原来的左子树变成其原来父结点的右子树
-     * @param currentNode
+     * 左旋：将其右孩子的左孩子变成其右孩子，当前结点变成其右孩子的左孩子，其右孩子填补当前结点位置
+     * @param node
      * @param <T>
      */
-    private <T extends Comparable<T>> void leftRotate(Node<T> currentNode) {
+    private <T extends Comparable<T>> void leftRotate(Node<T> node) {
+        Node <T> currentNode = node;
         if (currentNode.parent != Node.nil) {
-            if (currentNode == currentNode.parent.leftChild) {
-                currentNode.parent.leftChild = currentNode.rightChild;
+            if (currentNode == currentNode.parent.leftChild) { //当前结点是其父的左孩子
+                currentNode.parent.leftChild = currentNode.rightChild; // 将其右孩子变成其父的左孩子（右孩子填补当前结点位置）
             }
             else {
-                currentNode.parent.rightChild = currentNode.rightChild;
+                currentNode.parent.rightChild = currentNode.rightChild; //将其右孩子变成其父的右孩子（右孩子填补当前结点位置）
             }
 
-            currentNode.rightChild.parent = currentNode.parent;
-            currentNode.parent = currentNode.rightChild;
+            currentNode.rightChild.parent = currentNode.parent; //修改其右孩子的父指针，移向其父（右孩子填补当前结点位置）
+            currentNode.parent = currentNode.rightChild; //当前结点变成其右孩子的孩子
             if (currentNode.rightChild.leftChild != Node.nil) {
-                currentNode.rightChild.leftChild.parent = currentNode;
+                currentNode.rightChild.leftChild.parent = currentNode; //当前结点右孩子的左孩子变成当前结点的孩子，修改父指针
             }
-            currentNode.rightChild = currentNode.rightChild.leftChild;
+            currentNode.rightChild = currentNode.rightChild.leftChild; //当前结点右孩子的左孩子变成当前结点的右孩子
             currentNode.parent.leftChild = currentNode;
+//            currentNode.rightChild.leftChild = currentNode; //当前结点变成其右孩子的左孩子
         }
-        else { //根结点
+        else { //根就是当前结点
             Node right = root.rightChild;
-            root.rightChild = right.leftChild;
-            right.leftChild.parent = root;
+            root.rightChild = right.leftChild; //将其右孩子的左孩子变成其右孩子
+            right.leftChild.parent = root; //修改对应的父指向
+
             root.parent = right;
-            right.leftChild = root;
+            right.leftChild = root; //当前结点变成其右孩子的左孩子
             right.parent = Node.nil;
-            root = right;
+            root = right;  //右孩子填补当前位置
+        }
+    }
+
+    /**
+     * 右旋：父结点变成黑色，爷爷变成红色,准备右旋。将其左孩子的右子树变成其左子树，将当前结点变成其左孩子的右子树。其左孩子填补当前位置
+     * @param node  node
+     * @param <T>
+     */
+    private <T extends Comparable<T>> void rightRotate(Node<T> node) {
+        Node <T> currentNode = node;
+        if (currentNode.parent != Node.nil) {
+            if (currentNode == currentNode.parent.leftChild) {       //判断当前结点是其父的左/右结点，其左孩子填补当前位置
+                currentNode.parent.leftChild = currentNode.leftChild;
+            } else {
+                currentNode.parent.rightChild = currentNode.leftChild;
+            }
+
+            currentNode.leftChild.parent = currentNode.parent; //其左孩子填补当前位置，左孩子父指针指向其父指针
+            currentNode.parent = currentNode.leftChild; //当前结点变成其左孩子的子树
+            if (currentNode.leftChild.rightChild != Node.nil) {
+                currentNode.leftChild.rightChild.parent = currentNode; //将其左孩子的右子树变成其左子树
+            }
+            currentNode.leftChild = currentNode.leftChild.rightChild; //将其左孩子的右子树变成其左子树
+            currentNode.parent.rightChild = currentNode;
+//            currentNode.leftChild.rightChild = currentNode;  //当前结点左孩子的右孩子变成当前结点
+        } else {  //当前结点是根结点
+            Node<T> left = root.leftChild;
+            root.leftChild = root.leftChild.rightChild; // 将其左孩子的右子树变成其左子树
+            left.rightChild.parent = root;
+            root.parent = left;
+            left.rightChild = root; //将当前结点变成其左孩子的右子树
+            left.parent = Node.nil;
+            root = left; //左孩子填补当前位置
         }
     }
 
@@ -140,13 +218,41 @@ public class RedBlackTree {
     private static class Node<T extends Comparable<T>> extends TreeNode<T> {
         private static final Node nil = new Node<>(null);
         T data;
-        Node<T> parent;
+        Node<T> parent = nil;
         Node<T> leftChild = nil;
         Node<T> rightChild = nil;
         boolean black = true; //默认黑色
 
         public Node(T data) {
             this.data = data;
+        }
+
+        @Override
+        public T getData() {
+            return data;
+        }
+
+        @Override
+        public void setData(T data) {
+            this.data = data;
+        }
+
+        @Override
+        public Node<T> getLeftChild() {
+            return leftChild;
+        }
+
+        public void setLeftChild(Node<T> leftChild) {
+            this.leftChild = leftChild;
+        }
+
+        @Override
+        public Node<T> getRightChild() {
+            return rightChild;
+        }
+
+        public void setRightChild(Node<T> rightChild) {
+            this.rightChild = rightChild;
         }
     }
 }
