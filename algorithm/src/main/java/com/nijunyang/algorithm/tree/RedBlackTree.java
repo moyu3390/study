@@ -166,8 +166,7 @@ public class RedBlackTree {
                 currentNode.rightChild.leftChild.parent = currentNode; //当前结点右孩子的左孩子变成当前结点的孩子，修改父指针
             }
             currentNode.rightChild = currentNode.rightChild.leftChild; //当前结点右孩子的左孩子变成当前结点的右孩子
-            currentNode.parent.leftChild = currentNode;
-//            currentNode.rightChild.leftChild = currentNode; //当前结点变成其右孩子的左孩子
+            currentNode.parent.leftChild = currentNode; //当前结点新的父亲（以前它的右孩子）的左孩子指向当前节点
         }
         else { //根就是当前结点
             Node right = root.rightChild;
@@ -182,7 +181,8 @@ public class RedBlackTree {
     }
 
     /**
-     * 右旋：父结点变成黑色，爷爷变成红色,准备右旋。将其左孩子的右子树变成其左子树，将当前结点变成其左孩子的右子树。其左孩子填补当前位置
+     * 右旋：父结点变成黑色，爷爷变成红色,准备右旋。将其左孩子的右子树变成其左子树，将当前结点变成其左孩子的右子树。其左孩子填补当前位置，
+     * 最后当前节点变成其
      * @param node  node
      * @param <T>
      */
@@ -201,8 +201,7 @@ public class RedBlackTree {
                 currentNode.leftChild.rightChild.parent = currentNode; //将其左孩子的右子树变成其左子树
             }
             currentNode.leftChild = currentNode.leftChild.rightChild; //将其左孩子的右子树变成其左子树
-            currentNode.parent.rightChild = currentNode;
-//            currentNode.leftChild.rightChild = currentNode;  //当前结点左孩子的右孩子变成当前结点
+            currentNode.parent.rightChild = currentNode; //当前结点新的父亲（以前它的左孩子）的右孩子指向当前节点
         } else {  //当前结点是根结点
             Node<T> left = root.leftChild;
             root.leftChild = root.leftChild.rightChild; // 将其左孩子的右子树变成其左子树
