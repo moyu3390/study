@@ -29,7 +29,7 @@ public class RedBlackTree {
         redBlackTree.insert(13);
         redBlackTree.insert(6);
         RedBlackTree.inOrderTraversal(redBlackTree);
-
+        System.out.println();
     }
 
     public <T extends Comparable<T>> void insert(T data){
@@ -37,6 +37,7 @@ public class RedBlackTree {
         Node<T> node = new Node<>(data);
         if (root == Node.nil) {
             root = node;
+            node.parent.parent = Node.nil;
         }
         else {
             node.black = false;
@@ -97,12 +98,12 @@ public class RedBlackTree {
          * 右旋时将指针再指向爷爷结点，基于新的这个操作结点进行操作
          */
         Node<T> currentNode = node;
-        while (currentNode.parent != null && !currentNode.parent.black) {
+        while (!currentNode.parent.black) {
             Node<T> temp;
             if (currentNode.parent == currentNode.parent.parent.leftChild) { //当前父结点是左孩子
                 temp = currentNode.parent.parent.rightChild; //叔叔结点
                 //变色
-                if (temp != null && temp != Node.nil && !temp.black) { //叔叔也是红色，将父和叔叔都变黑色
+                if (temp != Node.nil && !temp.black) { //叔叔也是红色，将父和叔叔都变黑色
                     currentNode.parent.black = true;
                     temp.black = true;
                     currentNode.parent.parent.black = false; //爷爷变成红色
@@ -116,15 +117,15 @@ public class RedBlackTree {
                 }
                 //右旋
                 //父结点变成黑色，爷爷变成红色,准备右旋
-                node.parent.black = true;
-                node.parent.parent.black = false;
+                currentNode.parent.black = true;
+                currentNode.parent.parent.black = false;
                 //指针指向太爷爷去右旋
-                currentNode = node.parent.parent;
+                currentNode = currentNode.parent.parent;
                 rightRotate(currentNode);
             }
             else { //当前父结点是右孩子
                 temp = currentNode.parent.parent.leftChild;
-                if (temp != null && temp != Node.nil && !temp.black) {
+                if (temp != Node.nil && !temp.black) {
                     currentNode.parent.black = true;
                     temp.black = true;
                     currentNode.parent.parent.black = false;
@@ -136,13 +137,14 @@ public class RedBlackTree {
                     rightRotate(currentNode);
                 }
                 //父结点变成黑色，爷爷变成红色,准备左旋
-                node.parent.black = true;
-                node.parent.parent.black = false;
+                currentNode.parent.black = true;
+                currentNode.parent.parent.black = false;
                 //指针指向太爷爷去左旋
-                currentNode = node.parent.parent;
+                currentNode = currentNode.parent.parent;
                 leftRotate(currentNode);
             }
         }
+        root.black = true; //根结点始终黑色
     }
 
     /**
@@ -252,6 +254,12 @@ public class RedBlackTree {
 
         public void setRightChild(Node<T> rightChild) {
             this.rightChild = rightChild;
+        }
+
+        @Override
+        public String toString() {
+            return "data=" + data;
+
         }
     }
 }

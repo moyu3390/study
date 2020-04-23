@@ -60,6 +60,7 @@ public final class TreeUtil {
         inOrderTraversal(node.getLeftChild());
         if (node.getData() != null) {
             System.out.print(node.getData());
+            System.out.print(" ");
         }
         inOrderTraversal(node.getRightChild());
     }
