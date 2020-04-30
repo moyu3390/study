@@ -58,6 +58,7 @@ public class SensitiveAspect {
                 for (Annotation annotation : parameterAnnotation) {
                     if (annotation instanceof SensitiveInfo) {
                         Object paramValue = args[paramIndex];
+                        System.out.println(paramValue);
                         handleEncrypt(paramValue);
                     }
                 }
@@ -77,7 +78,7 @@ public class SensitiveAspect {
      *
      * @param bean
      */
-    private void handleEncrypt(Object bean) throws IllegalAccessException {
+    private void handleEncrypt(Object bean) throws IllegalAccessException, NoSuchFieldException {
         if (Objects.isNull(bean)) {
             return;
         }
@@ -85,7 +86,11 @@ public class SensitiveAspect {
         if (bean instanceof String) {
             String plaintextValue = (String) bean;
             if (StringUtils.isNotBlank(plaintextValue)) {
-                bean = CipherUtil.encryptString(plaintextValue, secretKey);
+                String encryptValue = CipherUtil.encryptString(plaintextValue, secretKey);
+                Field field = bean.getClass().getDeclaredField("value");
+                field.setAccessible(true);
+                char[] ch =(char[])field.get(bean);
+                field.set(bean, encryptValue.toCharArray());
             }
         } else if (beanType.isArray()) {
             int len = Array.getLength(bean);
