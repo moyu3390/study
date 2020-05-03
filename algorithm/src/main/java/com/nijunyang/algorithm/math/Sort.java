@@ -20,6 +20,10 @@ public class Sort {
 //        shellSort(arr);
         quicklySort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
+////        heapSort(arr);
+//        int[] arr = {8, 4, 20, 7, 3, 1, 25, 14};
+        heapSort(arr);
+        System.out.println(Arrays.toString(arr));
 
     }
 
@@ -199,4 +203,58 @@ public class Sort {
 
     }
 
+
+    /**
+     * 堆排序
+     * @param arr
+     */
+    private static void heapSort(int[] arr) {
+        int len = arr.length;
+        /**
+         * 数组构造堆树，从倒数第一个非叶子结点开始逆向一次进行堆化操作。最后一个叶子结点的父结点就是最后一个非叶子结点。
+         * 索引从0开始。两个子结点索引是2i+1和2i+2,所以最后一个非叶子结点的索引就是 len/2 - 1
+         */
+        for (int i = len / 2 - 1; i >=0 ; i--) { //时间复杂度nlogn
+            createMaxHeap(arr, i, len);
+        }
+        for (int i = len - 1; i > 0 ; i--) { //时间复杂度nlogn
+            int maxData = arr[0]; //第一个数最大
+            arr[0] = arr[i];
+            arr[i] = maxData;
+            /**
+             * 交换第一个最后一个位置,然后重新构造大顶堆。每循环一次就构造好了一个数的位置，
+             * 最后到i为止都是排好序的，堆化的时候不需要再操作了
+             */
+            createMaxHeap(arr, 0, i);
+        }
+    }
+    /**
+     * 大顶堆构造及堆化过程
+     * @param arr
+     * @param start  
+     * @param end  end之后是已经排好序的，所以需要end下标来判断截止
+     */
+    private static void createMaxHeap(int[] arr, int start, int end) {
+        int parentIndex = start;
+        int leftChildIndex = 2 * parentIndex + 1;
+        while (leftChildIndex < end) {
+            int tempIndex = leftChildIndex;
+            //比较左右结点谁大，记录谁的下标
+            if (leftChildIndex + 1 < end && arr[leftChildIndex] < arr[leftChildIndex + 1]) {
+                tempIndex = leftChildIndex + 1;
+            }
+            //父结点比孩子大，不交换
+            if (arr[parentIndex] > arr[tempIndex]) {
+                return;
+            }
+            else {
+                //交换数据，刷新父结点继续执行堆化操作
+                int tempData = arr[parentIndex];
+                arr[parentIndex] = arr[tempIndex];
+                arr[tempIndex] = tempData;
+                parentIndex = tempIndex;
+                leftChildIndex = 2 * parentIndex + 1;
+            }
+        }
+    }
 }
