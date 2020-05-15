@@ -15,10 +15,10 @@ public class CyclicBarrierTest implements Runnable{
     }
     public void run() {
         try {
-            System.out.println("index: " + index);
-            index--;
+//            System.out.println("index: " + index);
+//            index--;
+            System.out.println(Thread.currentThread().getName() + "进度条100%... ");
             cyclicBarrier.await();
-            System.out.println("放行... ");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,16 +26,15 @@ public class CyclicBarrierTest implements Runnable{
     public static void main(String[] args) throws Exception {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(11, new Runnable() {
                     public void run() {
-                        System.out.println("所有特工到达屏障，准备开始执行秘密任务");
+                        System.out.println("所有人进度条100%，准备开始游戏");
                     }
                 });
-
         for (int i = 0; i < 10; i++) {
-            new Thread(new CyclicBarrierTest(cyclicBarrier,i)).start();
+            new Thread(new CyclicBarrierTest(cyclicBarrier,i), "线程" + i).start();
         }
         cyclicBarrier.await();
         Thread.sleep(300);
-        System.out.println("全部到达屏障....");
+        System.out.println("开始游戏....");
     }
 
 }
