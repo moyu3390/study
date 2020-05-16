@@ -249,6 +249,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
                     return true;
                 }
             }
+            //判断当前线程是否是独占锁的线程 如果是则重入（状态+1）
             else if (current == getExclusiveOwnerThread()) {
                 int nextc = c + acquires;
                 if (nextc < 0)

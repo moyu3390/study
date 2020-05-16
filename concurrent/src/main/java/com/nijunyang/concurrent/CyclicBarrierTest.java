@@ -8,15 +8,11 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class CyclicBarrierTest implements Runnable{
     private CyclicBarrier cyclicBarrier;
-    private int index;
-    public CyclicBarrierTest(CyclicBarrier cyclicBarrier, int index) {
+    public CyclicBarrierTest(CyclicBarrier cyclicBarrier) {
         this.cyclicBarrier = cyclicBarrier;
-        this.index = index;
     }
     public void run() {
         try {
-//            System.out.println("index: " + index);
-//            index--;
             System.out.println(Thread.currentThread().getName() + "进度条100%... ");
             cyclicBarrier.await();
         } catch (Exception e) {
@@ -24,13 +20,13 @@ public class CyclicBarrierTest implements Runnable{
         }
     }
     public static void main(String[] args) throws Exception {
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(11, new Runnable() {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(11, new Runnable() {//11个是因为还有一个主线程也在等待
                     public void run() {
                         System.out.println("所有人进度条100%，准备开始游戏");
                     }
                 });
         for (int i = 0; i < 10; i++) {
-            new Thread(new CyclicBarrierTest(cyclicBarrier,i), "线程" + i).start();
+            new Thread(new CyclicBarrierTest(cyclicBarrier), "线程" + i).start();
         }
         cyclicBarrier.await();
         Thread.sleep(300);

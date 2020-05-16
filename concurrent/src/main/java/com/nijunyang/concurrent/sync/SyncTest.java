@@ -12,15 +12,13 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class SyncTest {
 
-    private Object objectLock = new Object();
     private Lock lock = new ReentrantLock(true);
 
     public static void main(String[] args) {
         SyncTest syncTest = new SyncTest();
         new Thread(()->syncTest.testLock(), "线程1").start();
-//        new Thread(()->syncTest.testLock(), "线程2").start();
-
-
+        new Thread(()->syncTest.testLock(), "线程2").start();
+        new Thread(()->syncTest.testLock(), "线程3").start();
     }
 
     public void testLock() {
