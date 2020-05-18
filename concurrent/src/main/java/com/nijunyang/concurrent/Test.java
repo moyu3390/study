@@ -23,27 +23,29 @@ public class Test {
         Unsafe unsafe = Unsafe.getUnsafe();
 //        unsafe.compareAndSwapInt()
         AtomicInteger atomicInteger = new AtomicInteger();
+        atomicInteger.decrementAndGet();
         Executors.newCachedThreadPool();
     }
-}
 
-class Test1 implements Runnable{
-    private volatile int sum = 100;
+    static class Test1 implements Runnable{
+        private volatile int sum = 100;
 
-    @Override
-    public void run() {
-        synchronized (this){
-            while (sum > 0){
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        @Override
+        public void run() {
+            synchronized (this){
+                while (sum > 0){
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + ": " + sum--);
                 }
-                System.out.println(Thread.currentThread().getName() + ": " + sum--);
             }
         }
     }
 }
+
 
 
 
