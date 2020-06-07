@@ -1,10 +1,8 @@
 package com.nijunyang.rabbitmq.util;
 
-import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 

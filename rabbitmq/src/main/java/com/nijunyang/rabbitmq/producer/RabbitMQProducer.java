@@ -15,7 +15,7 @@ public class RabbitMQProducer {
 
         Connection connection = RabbitMQUtils.getConnection();
         Channel channel = connection.createChannel();
-        String message = "hello rabbitMQ." + new Random().nextInt(100);
+
 
         /*------------------*/
         //1：默认消息投递
@@ -31,7 +31,10 @@ public class RabbitMQProducer {
         String exchangeName = "njy.topicchange";
         String routingKey = "directchange.key"; //.分割，#匹配多个，*匹配一个
 
-        channel.basicPublish(exchangeName, routingKey, null, message.getBytes("utf-8"));
+        for (int i = 0; i < 20; i++) {
+            String message = "hello rabbitMQ." + i;
+            channel.basicPublish(exchangeName, routingKey, null, message.getBytes("utf-8"));
+        }
         /*------------------*/
         RabbitMQUtils.close(channel, connection);
     }
