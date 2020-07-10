@@ -1,0 +1,18 @@
+Redis官网：https://redis.io/download
+Redis 操作指令：http://redisdoc.com/
+Redis中文网：https://www.redis.net.cn/order/
+Spring官网：https://spring.io/
+Spring 文档：https://docs.spring.io/spring/docs/current/spring-framework-reference/index.html
+Springcloud中国社区：http://springcloud.cn/
+Springcloud 中文网：https://www.springcloud.cc/
+Springboot 配置大全：2.1.9. RELEASE
+https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/common-application-properties.html
+Json数据操作工具：http://www.bejson.com/
+在线工具：https://tool.lu/
+Maven依赖版本查询：https://mvnrepository.com/
+数据结构：https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+常用API文档汇总：http://tool.oschina.net/apidocs
+plantuml 类图语法：http://plantuml.com/zh/class-diagram
+在线类图：https://online.visual-paradigm.com/diagrams/tutorials/class-diagram-tutorial/
+Java历史版本：https://www.oracle.com/technetwork/java/archive-139210.html
+Hadoop参数：https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml
