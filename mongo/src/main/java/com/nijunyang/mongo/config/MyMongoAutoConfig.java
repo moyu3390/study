@@ -4,6 +4,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @EnableConfigurationProperties(MyMultipleMongoProperties.class)
 @ConditionalOnProperty(name = "my.mongo.my-mongo-properties.mapping")
 @ConfigurationProperties(prefix = "my.mongo.mapping")
+@Setter
 public class MyMongoAutoConfig {
 
     private Map<String, String> myMapping;
