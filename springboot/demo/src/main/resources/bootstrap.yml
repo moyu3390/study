@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      label: master
+      uri: http://localhost:9090/
+  profiles:
+    active: dev
+  application:
+    name: demo
