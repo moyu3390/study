@@ -1,8 +1,10 @@
 package com.nijunyang.redis.controller;
 
 import com.nijunyang.algorithm.redpackage.RedPackageUtils;
+import com.nijunyang.redis.model.GameToken;
 import com.nijunyang.redis.model.User;
 import com.nijunyang.redis.service.RedisService;
+import com.nijunyang.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -122,6 +125,22 @@ public class RedisController {
         setOperations.add("setkey", stu2);
         Set set = setOperations.members("setkey");
         return ResponseEntity.ok(set);
+    }
+
+
+    @GetMapping("/game")
+    public ResponseEntity<String> game() {
+        GameToken gameToken1 = new GameToken("905bd3bad98c4997955603516b7d7276", 1593392079829L);
+        redisTemplate.opsForValue().set("gameKey", JsonUtils.write2JsonString(gameToken1));
+
+        Object object = redisTemplate.opsForValue().get("gameKey");
+        if (object != null) {
+            GameToken gameToken = JsonUtils.readJson2Entity(object.toString(), GameToken.class) ;
+            gameToken.getCreateTime();
+            return ResponseEntity.ok(gameToken.getGameToken());
+        }
+
+        return ResponseEntity.ok("");
     }
 
 

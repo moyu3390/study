@@ -1,21 +1,24 @@
-#spring:
-#  application:
-#    name: demo
-#  security:
-#    user:
-#      name: nijunyang
-#      password: 123456
+spring:
+  application:
+    name: demo
+  security:
+    user:
+      name: nijunyang
+      password: 123456
 #server:
 #  compression:
 #    enabled: false
 #    mime-types: text/html,text/xml,text/plain,application/json,application/xml
 #    min-response-size: 1KB
 
-# \u8BBE\u7F6E\u66B4\u9732\u6240\u6709\u7AEF\u70B9
+# 设置暴露所有端点
 management:
   endpoints:
     web:
       exposure:
+#        include: refresh
         include: "*"
+    health:
+      show-details: ALWAYS
 #  security:
-        #    enabled: false
+#    enabled: false
