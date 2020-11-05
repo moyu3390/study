@@ -10,6 +10,8 @@ https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/common-appl
 Json数据操作工具：http://www.bejson.com/
 在线工具：https://tool.lu/
 Maven依赖版本查询：https://mvnrepository.com/
+Maven插件：http://maven.apache.org/plugins/index.html
+checkstyle配置：https://checkstyle.sourceforge.io/config_javadoc.html#JavadocMethod
 数据结构：https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
 常用API文档汇总：http://tool.oschina.net/apidocs
 plantuml 类图语法：http://plantuml.com/zh/class-diagram
