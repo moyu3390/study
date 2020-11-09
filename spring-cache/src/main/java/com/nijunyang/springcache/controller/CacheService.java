@@ -12,8 +12,8 @@ public class CacheService {
 
     /**
      * 默认是JDK缓存
-     * value 缓存的名字
-     * key   key
+     * value 缓存组件的名字
+     * key   缓存数据的key(spel表达式)
      * unless 符合表达式的结果不缓存
      * condition 条件  满足走缓存，不满足直接执行方法体
      * sync    同步缓存（多线程情况锁住缓存计算，只允许一个线程操作），个人理解就类似在方法上加锁，避免多线程场景，同样的参数请求多个过来，每个请求都去执行方法体进行计算
