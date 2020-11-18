@@ -1,5 +1,11 @@
 package com.nijunyang.eureka.order.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nijunyang.eureka.order.listener.MyListener;
+import com.nijunyang.eureka.order.listener.redis.MessageHolder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +19,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public class OrderController {
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
     @GetMapping("/create")
     public ResponseEntity<String> create() {
         return ResponseEntity.ok().body("create order");
     }
+
+    @GetMapping
+    public ResponseEntity<String> get() {
+        return ResponseEntity.ok().body("order detail");
+    }
+
+
+    @GetMapping("pub")
+    public ResponseEntity<String> get0() throws JsonProcessingException {
+        long l = System.currentTimeMillis();
+        MessageHolder messageHolder = new MessageHolder(null, null, l);
+        redisTemplate.convertAndSend(MyListener.TOPIC, messageHolder);
+        return ResponseEntity.ok().body("发布时间：" + l);
+    }
+
 }

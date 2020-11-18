@@ -6,5 +6,10 @@ server:
 eureka:
   client:
     register-with-eureka: false
+    registryFetchIntervalSeconds: 30 #客户端默认缓存服务列表
   server:
     enable-self-preservation: false
+    evictionIntervalTimerInMs: 4000 #服务端剔除服务的时间间隔
+  instance:
+    leaseExpirationDurationInSeconds: 90 #超时未续约的服务剔除 实际代码实现 90+90
+

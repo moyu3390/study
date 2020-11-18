@@ -1,9 +1,19 @@
 spring:
   application:
     name: order
+
+  redis:
+    host: 111.229.53.45
+    port: 6379
+    password: Wbqsphr.1114redis
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+    instanceInfoReplicationIntervalSeconds: 30
+    registryFetchIntervalSeconds: 30
+  server:
+    evictionIntervalTimerInMs: 4000
+
 server:
   port: 8082
