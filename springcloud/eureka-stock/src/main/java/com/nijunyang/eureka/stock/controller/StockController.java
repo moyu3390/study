@@ -36,8 +36,10 @@ public class StockController implements InitializingBean {
     @Autowired
     EurekaClient eurekaClient;
 
-//    @Autowired
-//    ILoadBalancer loadBalancer;
+
+    ILoadBalancer loadBalancer;
+
+    ILoadBalancer ribbonLoadBalancer;
 
     @Autowired
     ApplicationContext applicationContext;

@@ -1,10 +1,11 @@
-package com.nijunyang.eureka.order.listener;
+package com.nijunyang.eureka.extension.listener;
 
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Applications;
 import com.netflix.discovery.shared.transport.EurekaHttpClient;
-import com.nijunyang.eureka.order.listener.redis.MessageHolder;
+import com.nijunyang.eureka.extension.constants.Constant;
+import com.nijunyang.eureka.extension.listener.redis.MessageHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Component;
@@ -27,8 +27,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class MyListener implements ApplicationListener<ContextClosedEvent>, InitializingBean {
-
-    public static final String TOPIC = "refresh";
 
     @Value("${spring.application.name}")
     String appName;
@@ -68,7 +66,7 @@ public class MyListener implements ApplicationListener<ContextClosedEvent>, Init
 //        container.removeMessageListener(listenerAdapter);
         MessageHolder messageHolder =
                 new MessageHolder(appName, applicationInfoManager.getInfo().getId(), System.currentTimeMillis());
-        redisTemplate.convertAndSend(TOPIC, messageHolder);
+        redisTemplate.convertAndSend(Constant.TOPIC, messageHolder);
         log.info("容器销毁123");
     }
 

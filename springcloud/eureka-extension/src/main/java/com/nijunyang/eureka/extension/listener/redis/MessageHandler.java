@@ -1,20 +1,17 @@
-package com.nijunyang.eureka.order.listener.redis;
+package com.nijunyang.eureka.extension.listener.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.loadbalancer.DynamicServerListLoadBalancer;
 import com.netflix.loadbalancer.ILoadBalancer;
-import com.nijunyang.eureka.order.listener.AopTargetUtils;
+import com.nijunyang.eureka.extension.util.AopTargetUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.netflix.eureka.CloudEurekaClient;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -23,7 +20,6 @@ import java.lang.reflect.Method;
  *
  * @author nijunyang
  */
-@Component
 @Slf4j
 public class MessageHandler {
 
@@ -50,10 +46,10 @@ public class MessageHandler {
         MessageHolder messageHolder = objectMapper.readValue(substring, MessageHolder.class) ;
         long cancelTime = messageHolder.getSendTime();
         long now = System.currentTimeMillis();
-        if (now <= cancelTime + evictionIntervalTimerInMs) {
-            Thread.sleep(evictionIntervalTimerInMs - (now - cancelTime));
-        }
-        Thread.sleep(DEFAULT_DELAY);
+//        if (now <= cancelTime + evictionIntervalTimerInMs) {
+//            Thread.sleep(evictionIntervalTimerInMs - (now - cancelTime));
+//        }
+//        Thread.sleep(DEFAULT_DELAY);
 
         log.info("订阅消息： " + substring);
         refreshEurekaAndRibbonCache(0);

@@ -1,6 +1,5 @@
-package com.nijunyang.eureka.order.listener;
+package com.nijunyang.eureka.extension.util;
 
-import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;
@@ -19,8 +18,8 @@ public class AopTargetUtils {
      * 获取 目标对象
      *
      * @param proxy 代理对象
-     * @return
-     * @throws Exception
+     * @return 原生对象
+     * @throws Exception Exception
      */
     public static Object getTarget(Object proxy) throws Exception {
         if (!AopUtils.isAopProxy(proxy)) {
@@ -36,6 +35,12 @@ public class AopTargetUtils {
     }
 
 
+    /**
+     * cglib
+     * @param proxy 代理对象
+     * @return 原生对象
+     * @throws Exception Exception
+     */
     private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
         h.setAccessible(true);
@@ -49,7 +54,12 @@ public class AopTargetUtils {
         return target;
     }
 
-
+    /**
+     * JDK动态代理
+     * @param proxy 代理对象
+     * @return 原生对象
+     * @throws Exception  Exception
+     */
     private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
         h.setAccessible(true);

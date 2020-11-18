@@ -1,13 +1,13 @@
-package com.nijunyang.eureka.order.listener.redis;
+package com.nijunyang.eureka.extension.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nijunyang.eureka.order.listener.MyListener;
+import com.nijunyang.eureka.extension.constants.Constant;
+import com.nijunyang.eureka.extension.listener.redis.MessageHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -57,7 +57,7 @@ public class RedisConfig {
     RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter){
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.addMessageListener(listenerAdapter, new PatternTopic(MyListener.TOPIC));
+        container.addMessageListener(listenerAdapter, new PatternTopic(Constant.TOPIC));
 
         //序列化对象（特别注意：发布的时候需要设置序列化；订阅方也需要设置序列化）
         Jackson2JsonRedisSerializer seria = new Jackson2JsonRedisSerializer(Object.class);
@@ -74,6 +74,11 @@ public class RedisConfig {
     MessageListenerAdapter listenerAdapter(MessageHandler messageHandler){
         //这个地方 是给messageListenerAdapter 传入一个消息接受的处理器，反射调用handleMessage
         return new MessageListenerAdapter(messageHandler,"handleMessage");
+    }
+
+    @Bean
+    MessageHandler messageHandler() {
+        return new MessageHandler();
     }
 
 }
