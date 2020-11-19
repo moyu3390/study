@@ -6,6 +6,7 @@ Spring 文档：https://docs.spring.io/spring/docs/current/spring-framework-refe
 Springcloud中国社区：http://springcloud.cn/
 Springcloud 中文网：https://www.springcloud.cc/
 Springboot 配置大全：2.1.9. RELEASE
+各类语言框架：http://c.biancheng.net/
 https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/common-application-properties.html
 Json数据操作工具：http://www.bejson.com/
 在线工具：https://tool.lu/
