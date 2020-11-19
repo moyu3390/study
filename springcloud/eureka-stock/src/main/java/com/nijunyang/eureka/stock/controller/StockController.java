@@ -8,6 +8,7 @@ import com.netflix.loadbalancer.ILoadBalancer;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ZoneAwareLoadBalancer;
 import com.nijunyang.eureka.stock.feign.OrderFeignClient;
+import feign.Client;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -40,6 +41,9 @@ public class StockController implements InitializingBean {
     ILoadBalancer loadBalancer;
 
     ILoadBalancer ribbonLoadBalancer;
+
+    @Autowired
+    Client feignClient;
 
     @Autowired
     ApplicationContext applicationContext;

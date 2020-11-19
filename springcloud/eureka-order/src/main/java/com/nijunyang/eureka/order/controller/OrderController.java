@@ -1,9 +1,8 @@
 package com.nijunyang.eureka.order.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nijunyang.eureka.extension.constants.Constant;
-import com.nijunyang.eureka.extension.listener.redis.MessageHolder;
+import com.nijunyang.eureka.extension.component.redis.MessageHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class OrderController {
     public ResponseEntity<String> get0() {
         long l = System.currentTimeMillis();
         MessageHolder messageHolder = new MessageHolder(null, null, l);
-        redisTemplate.convertAndSend(Constant.TOPIC, messageHolder);
+        redisTemplate.convertAndSend(Constant.REDIS_TOPIC, messageHolder);
         return ResponseEntity.ok().body("发布时间：" + l);
     }
 

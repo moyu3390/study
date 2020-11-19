@@ -9,5 +9,13 @@ public final class Constant {
     private Constant() {
     }
 
-    public static final String TOPIC = "refresh";
+    /**
+     * eureka服务刷新topic
+     */
+    public static final String REDIS_TOPIC = "eureka_server_refresh";
+
+    /**
+     * 重试次数
+     */
+    public static final int RETRY_TIME = 3;
 }

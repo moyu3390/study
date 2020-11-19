@@ -1,4 +1,4 @@
-package com.nijunyang.eureka.extension.listener.redis;
+package com.nijunyang.eureka.extension.component.redis;
 
 import lombok.Getter;
 import lombok.Setter;

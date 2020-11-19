@@ -16,12 +16,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+<!--    <modules>-->
+<!--        <module>config</module>-->
+<!--        <module>eureka-extension</module>-->
+<!--        <module>eureka-order</module>-->
+<!--        <module>eureka-stock</module>-->
+<!--        <module>eurekaserver</module>-->
+<!--        <module>gateway</module>-->
+<!--        <module>zuul</module>-->
+<!--    </modules>-->
 </project>

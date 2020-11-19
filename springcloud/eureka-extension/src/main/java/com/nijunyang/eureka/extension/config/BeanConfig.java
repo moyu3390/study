@@ -3,8 +3,9 @@ package com.nijunyang.eureka.extension.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nijunyang.eureka.extension.component.ExtensionComponent;
 import com.nijunyang.eureka.extension.constants.Constant;
-import com.nijunyang.eureka.extension.listener.redis.MessageHandler;
+import com.nijunyang.eureka.extension.component.redis.MessageHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -21,7 +22,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
  * @author nijunyang
  */
 @Configuration
-public class RedisConfig {
+public class BeanConfig {
 
     @Bean
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
@@ -57,7 +58,7 @@ public class RedisConfig {
     RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter){
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.addMessageListener(listenerAdapter, new PatternTopic(Constant.TOPIC));
+        container.addMessageListener(listenerAdapter, new PatternTopic(Constant.REDIS_TOPIC));
 
         //序列化对象（特别注意：发布的时候需要设置序列化；订阅方也需要设置序列化）
         Jackson2JsonRedisSerializer seria = new Jackson2JsonRedisSerializer(Object.class);
@@ -72,13 +73,18 @@ public class RedisConfig {
 
     @Bean
     MessageListenerAdapter listenerAdapter(MessageHandler messageHandler){
-        //这个地方 是给messageListenerAdapter 传入一个消息接受的处理器，反射调用handleMessage
+        //注入消息处理器，反射调用handleMessage方法
         return new MessageListenerAdapter(messageHandler,"handleMessage");
     }
 
     @Bean
     MessageHandler messageHandler() {
         return new MessageHandler();
+    }
+
+    @Bean
+    ExtensionComponent extensionComponent() {
+        return new ExtensionComponent();
     }
 
 }
