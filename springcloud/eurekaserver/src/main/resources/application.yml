@@ -6,7 +6,7 @@ server:
 eureka:
   client:
     register-with-eureka: false
-    registryFetchIntervalSeconds: 30 #客户端默认缓存服务列表
+    registryFetchIntervalSeconds: 600 #客户端默认缓存服务列表
   server:
     enable-self-preservation: false
     evictionIntervalTimerInMs: 4000 #服务端剔除服务的时间间隔

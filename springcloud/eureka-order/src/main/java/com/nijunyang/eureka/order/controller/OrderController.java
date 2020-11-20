@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nijunyang.eureka.extension.constants.Constant;
 import com.nijunyang.eureka.extension.component.redis.MessageHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,9 @@ public class OrderController {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Value("${server.port}")
+    Integer port;
+
     @GetMapping("/create")
     public ResponseEntity<String> create() {
         return ResponseEntity.ok().body("create order");
@@ -31,14 +35,14 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<String> get() {
-        return ResponseEntity.ok().body("order detail");
+        return ResponseEntity.ok().body("order detail " + port);
     }
 
 
     @GetMapping("pub")
     public ResponseEntity<String> get0() {
         long l = System.currentTimeMillis();
-        MessageHolder messageHolder = new MessageHolder(null, null, l);
+        MessageHolder messageHolder = new MessageHolder("order", "orderAppId", l);
         redisTemplate.convertAndSend(Constant.REDIS_TOPIC, messageHolder);
         return ResponseEntity.ok().body("发布时间：" + l);
     }

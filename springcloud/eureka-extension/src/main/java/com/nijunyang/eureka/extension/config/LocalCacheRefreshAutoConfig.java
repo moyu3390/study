@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nijunyang.eureka.extension.component.ExtensionComponent;
 import com.nijunyang.eureka.extension.constants.Constant;
 import com.nijunyang.eureka.extension.component.redis.MessageHandler;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -21,8 +22,9 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
  *
  * @author nijunyang
  */
+@ConditionalOnProperty(name = "enable.refresh.eureka.local.cache", havingValue = "true")
 @Configuration
-public class BeanConfig {
+public class LocalCacheRefreshAutoConfig {
 
     @Bean
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){

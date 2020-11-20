@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.nijunyang.eureka.extension.config.BeanConfig
+com.nijunyang.eureka.extension.config.LocalCacheRefreshAutoConfig

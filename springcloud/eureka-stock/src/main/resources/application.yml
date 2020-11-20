@@ -10,9 +10,15 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+    registryFetchIntervalSeconds: 600
   server:
     evictionIntervalTimerInMs: 4000
 server:
   port: 8083
 ribbon:
-  ServerListRefreshInterval: 10
+  ServerListRefreshInterval: 600000 #ribbon本地缓存更新时间
+enable:
+  refresh:
+    eureka:
+      local:
+        cache: true
