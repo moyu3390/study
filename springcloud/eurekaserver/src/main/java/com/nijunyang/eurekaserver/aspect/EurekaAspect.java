@@ -41,7 +41,7 @@ public class EurekaAspect implements InitializingBean {
     PeerAwareInstanceRegistry peerAwareInstanceRegistry;
 
     public void test() {
-        LoadingCache<Key, Object> readWriteCacheMap;
+//        LoadingCache<Key, Object> readWriteCacheMap;
 //        readWriteCacheMap.invalidate();
 
 //        ResponseCacheImpl.invalidate(null,null,null);
