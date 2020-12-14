@@ -18,12 +18,20 @@ public class Sort {
 //        bubbleSort(arr);
 //        selectionSort(arr);
 //        shellSort(arr);
-        quicklySort(arr, 0, arr.length - 1);
-        System.out.println(Arrays.toString(arr));
+//        quicklySort(arr, 0, arr.length - 1);
+//        System.out.println(Arrays.toString(arr));
 ////        heapSort(arr);
 //        int[] arr = {8, 4, 20, 7, 3, 1, 25, 14};
-        heapSort(arr);
-        System.out.println(Arrays.toString(arr));
+//        heapSort(arr);
+//        System.out.println(Arrays.toString(arr));
+
+        System.out.println(3 >>> 1);
+        System.out.println(3 >> 1);
+        System.out.println(3 / 2);
+        System.out.println(4 >> 1);
+        System.out.println(4 >>> 1);
+        System.out.println(8 >>> 1);
+        System.out.println(8 >> 1);
 
     }
 

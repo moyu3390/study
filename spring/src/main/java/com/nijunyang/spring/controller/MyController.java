@@ -1,6 +1,7 @@
 package com.nijunyang.spring.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MyController {
 
     @GetMapping
+    @Transactional
     public ResponseEntity<String> methodA(){
         try{
             System.out.println("methodA");

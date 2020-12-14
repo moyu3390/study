@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * Description:
  * Created by nijunyang on 2020/2/27 22:41
  */
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class MyAspect {
 
     @Pointcut("execution(public * com.nijunyang.spring.controller.*.*())")

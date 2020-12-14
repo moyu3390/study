@@ -1,9 +1,7 @@
 package com.nijunyang.eurekaserver.aspect;
 
 import com.netflix.eureka.cluster.protocol.ReplicationListResponse;
-import com.netflix.eureka.registry.Key;
 import com.netflix.eureka.registry.PeerAwareInstanceRegistry;
-import com.netflix.eureka.registry.ResponseCacheImpl;
 import com.netflix.eureka.resources.PeerReplicationResource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -12,10 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.eureka.server.EurekaServerConfigBean;
-import org.springframework.cloud.netflix.eureka.server.InstanceRegistry;
 import org.springframework.context.ApplicationContext;
-import com.google.common.cache.LoadingCache;
-
 
 import javax.ws.rs.core.Response;
 
