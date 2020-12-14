@@ -4,7 +4,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848  #\u4E0D\u7528\u5199\u534F\u8BAE
+        server-addr: 127.0.0.1:8848  #不用写协议
 #        namespace: b5318282-d8fa-40a2-b33e-52812d1cebea  #dev id
         namespace: 688bf906-8b48-4ee2-a433-828f042ec860  #test id
         group: logistics

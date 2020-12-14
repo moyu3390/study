@@ -20,6 +20,14 @@ spring:
 #server:
 #  servlet:
 #    context-path: /
+#指定全局的负载均衡算法
 ribbon:
+  NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule
   eager-load:
     enabled: true
+#按服务指定负载均衡算法
+stock:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule
+    eager-load:
+      enabled: true
