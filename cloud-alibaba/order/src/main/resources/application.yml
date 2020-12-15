@@ -5,21 +5,11 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848  #不用写协议
-        namespace: 688bf906-8b48-4ee2-a433-828f042ec860   #test id
-        group: pay
+#        namespace: 688bf906-8b48-4ee2-a433-828f042ec860   #test id
+#        group: pay
         cluster-name: CD
         metadata:
-          version: v1
-#feign:
-#  client:
-#    default:
-#      #这里时间一定要调长，否则feign客户端会报ReadTimeOut  服务端报Error parsing HTTP request header
-#      connectTimeout: 60000
-#      readTimeout: 60000
-#      loggerLevel: basic
-#server:
-#  servlet:
-#    context-path: /
+          version: v2
 #指定全局的负载均衡算法
 ribbon:
   NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule
@@ -31,3 +21,14 @@ stock:
     NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule
     eager-load:
       enabled: true
+
+#feign:
+#  client:
+#    default:
+#      #这里时间一定要调长，否则feign客户端会报ReadTimeOut  服务端报Error parsing HTTP request header
+#      connectTimeout: 60000
+#      readTimeout: 60000
+#      loggerLevel: basic
+#server:
+#  servlet:
+#    context-path: /

@@ -62,20 +62,17 @@ public class ClusterWithVersionRule extends AbstractLoadBalancerRule {
         Instance invokedInstance;
         if (theSameClusterAndVersionList.isEmpty()) {
             //跨集群同版本调用, 随机选一个
+            if (theSameVersionList.isEmpty()) {
+                throw new RuntimeException("无对应版本服务");
+            }
             SecureRandom random = new SecureRandom();
             int i = random.nextInt(theSameVersionList.size());
             invokedInstance = theSameVersionList.get(i);
-            if (invokedInstance == null) {
-                throw new RuntimeException("无对应版本服务");
-            }
         } else {
             //同集群同版本调用 随机选一个
             SecureRandom random = new SecureRandom();
             int i = random.nextInt(theSameClusterAndVersionList.size());
             invokedInstance = theSameClusterAndVersionList.get(i);
-            if (invokedInstance == null) {
-                throw new RuntimeException("无对应版本服务");
-            }
         }
         return new NacosServer(invokedInstance);
     }
