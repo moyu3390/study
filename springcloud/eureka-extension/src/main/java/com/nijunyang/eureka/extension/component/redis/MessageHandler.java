@@ -44,21 +44,18 @@ public class MessageHandler {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Value("${eureka.server.evictionIntervalTimerInMs}")
-    private long evictionIntervalTimerInMs;
-
     public void handleMessage(Object object)
             throws Exception {
-
+        log.info("subscribe message: {}", object.toString());
         String s = object.toString();
         String substring = s.substring(s.indexOf(",") + 1, s.length() - 1);
         MessageHolder messageHolder = objectMapper.readValue(substring, MessageHolder.class);
         long cancelTime = messageHolder.getSendTime();
         long now = System.currentTimeMillis();
-        if (now <= cancelTime + DEFAULT_DELAY + evictionIntervalTimerInMs) {
-            Thread.sleep(evictionIntervalTimerInMs + DEFAULT_DELAY- (now - cancelTime));
-        }
-        Thread.sleep(DEFAULT_DELAY);
+//        if (now <= cancelTime + DEFAULT_DELAY + evictionIntervalTimerInMs) {
+//            Thread.sleep(evictionIntervalTimerInMs + DEFAULT_DELAY- (now - cancelTime));
+//        }
+//        Thread.sleep(DEFAULT_DELAY);
 
         log.info("订阅消息： " + substring);
         refreshEurekaAndRibbonCache(messageHolder, 0);
@@ -89,7 +86,7 @@ public class MessageHandler {
                 // 2.更新ribbon本地缓存
                 refreshRibbonCache(discoveryClient, messageHolder, cnt + 1);
             } else {
-                Thread.sleep(DEFAULT_DELAY);
+                Thread.sleep(DEFAULT_DELAY + DEFAULT_DELAY);
                 refreshEurekaAndRibbonCache(messageHolder, cnt + 1);
             }
         }
@@ -105,10 +102,11 @@ public class MessageHandler {
      */
     private void refreshRibbonCache(
             DiscoveryClient discoveryClient, MessageHolder messageHolder, int cnt) throws Exception {
+        log.info("start refresh ribbon cache...");
         Object feignClientNative = AopTargetUtils.getTarget(feignClient);
         String appName = messageHolder.getAppName();
         Application application = discoveryClient.getApplication(appName);
-        int instancesSize = application.getInstances().size();
+        int instancesSize = application == null ? 0 : application.getInstances().size();
         if (feignClientNative instanceof LoadBalancerFeignClient) {
             LoadBalancerFeignClient loadBalancerFeignClient = (LoadBalancerFeignClient) feignClient;
             //获取CachingSpringLoadBalancerFactory lbClientFactory;
@@ -133,10 +131,14 @@ public class MessageHandler {
                         log.info("{} local server list refreshed, number： {} -> {}, shutdown appId: {}",
                                 appName, oldSize, newSize, messageHolder.getAppId());
                     } else {
+                        log.info("eureka客户端缓存实例数:{}, ribbon负载均衡器中实例数：{} - {}",
+                                instancesSize, oldSize, newSize);
                         Thread.sleep(DEFAULT_DELAY);
                         refreshEurekaAndRibbonCache(messageHolder, cnt + 1);
                     }
                 }
+            } else {
+                log.info("{} 服务未被调用，无对应feignLoadBalancer", appName);
             }
         }
     }

@@ -9,7 +9,7 @@ eureka:
     registryFetchIntervalSeconds: 600 #客户端默认缓存服务列表
   server:
     enable-self-preservation: false
-    evictionIntervalTimerInMs: 4000 #服务端剔除服务的时间间隔
+    evictionIntervalTimerInMs: 60000 #服务端剔除服务的时间间隔
     useReadOnlyResponseCache: false #客户端拉取服务列表是否使用只读缓存
   instance:
     leaseExpirationDurationInSeconds: 90 #超时未续约的服务剔除 实际代码实现 90+90
