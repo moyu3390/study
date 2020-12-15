@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        shared-configs: #公用配置文件
+          - data-id: common1.yml
+            refresh: true #是否支持自动刷新
+          - data-id: common2.yml
+            refresh: true
+#        extension-configs: #同上
+
+  application:
+    name: order
+  profiles:
+    active: dev
