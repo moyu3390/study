@@ -16,13 +16,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-<!--    <modules>-->
-<!--        <module>config</module>-->
-<!--        <module>eureka-extension</module>-->
-<!--        <module>eureka-order</module>-->
-<!--        <module>eureka-stock</module>-->
-<!--        <module>eurekaserver</module>-->
-<!--        <module>gateway</module>-->
-<!--        <module>zuul</module>-->
-<!--    </modules>-->
+    <modules>
+        <module>config</module>
+        <module>eureka-extension</module>
+        <module>eureka-order</module>
+        <module>eureka-stock</module>
+        <module>eurekaserver</module>
+        <module>zuul</module>
+    </modules>
 </project>

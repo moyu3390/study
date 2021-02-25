@@ -2,18 +2,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>thead</module>
-        <module>java8</module>
-        <module>springcloud</module>
-    </modules>
-    <parent>
+	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>thead</module>
+        <module>java8</module>
+        <module>springcloud</module>
+        <module>zookeeper</module>
+        <module>wechat</module>
+        <module>util</module>
+        <module>starter</module>
+        <module>springboot</module>
+        <module>spring-cache</module>
+        <module>spring</module>
+        <module>rocket-mq</module>
+        <module>redis</module>
+        <module>rabbitmq-consumer</module>
+        <module>rabbitmq</module>
+        <module>nio</module>
+        <module>mysql</module>
+        <module>mybatis</module>
+        <module>mongo</module>
+        <module>mockito</module>
+        <module>leet-code</module>
+        <module>kafka</module>
+        <module>hadoop</module>
+        <module>design-patterns</module>
+        <module>concurrent</module>
+        <module>codegen</module>
+        <module>cloud-alibaba</module>
+        <module>autoconfiguration-starter-test</module>
+        <module>autoconfig</module>
+        <module>aspect</module>
+        <module>algorithm</module>
+    </modules>
 	<groupId>com.nijunyang</groupId>
 	<artifactId>study</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
