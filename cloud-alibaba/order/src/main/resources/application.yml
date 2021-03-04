@@ -28,6 +28,11 @@ logging:
       nijunyang:
         order:
           feign: debug
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
 
 #feign:
 #  client:

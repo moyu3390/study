@@ -1,4 +1,4 @@
-package com.nijunyang.springboot.argsresolver;
+package com.nijunyang.demo.argsresolver;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

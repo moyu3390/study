@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Test {
 
     @org.junit.Test
-    public void test() throws IOException {
+    public static void test() throws IOException {
         String filePath = PathUtils.combinePath("src", "main", "resources", "rest.yml");
         String info = FileUtils.readFileToString(new File(filePath));
 

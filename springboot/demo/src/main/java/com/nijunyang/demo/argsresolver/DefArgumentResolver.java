@@ -1,4 +1,4 @@
-package com.nijunyang.springboot.argsresolver;
+package com.nijunyang.demo.argsresolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.Nullable;

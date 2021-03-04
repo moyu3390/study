@@ -1,4 +1,4 @@
-package com.nijunyang.springboot.argsresolver;
+package com.nijunyang.demo.argsresolver;
 
 import lombok.*;
 
