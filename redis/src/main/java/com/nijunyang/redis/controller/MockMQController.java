@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -51,6 +52,19 @@ public class MockMQController {
         RedisScript<List<PointBO>> redisScript = RedisScript.of(luaScript, List.class);
         List<PointBO> pointBOList =
                 (List<PointBO>) redisTemplate.execute(redisScript, Collections.singletonList(SYNC_POINT_KEY), 0, 10);
+
+
+
+        ListOperations<String, Map> listOperations = redisTemplate.opsForList();
+        Long size = listOperations.size("key");
+        //lua脚本保证查询和清理key的原子性
+        String luaScriptStr = "local result = redis.call('lrange', KEYS[1], ARGV[1], ARGV[2]);" +
+                "redis.call('del', KEYS[1]);" +
+                "return result";
+        RedisScript<List<Map>> redisLuaScript = RedisScript.of(luaScriptStr, List.class);
+
+        List<Map> requestParamList = (List<Map>) redisTemplate.execute(
+                redisLuaScript, Collections.singletonList("key"), 0, size);
 
         return ResponseEntity.ok(pointBOList);
     }
