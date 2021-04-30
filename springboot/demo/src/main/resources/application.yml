@@ -10,15 +10,21 @@ spring:
 #    enabled: false
 #    mime-types: text/html,text/xml,text/plain,application/json,application/xml
 #    min-response-size: 1KB
-
+arthas:
+  agent-id: hsehdfsfghhwertyfad
+  tunnel-server: ws://127.0.0.1:7777/ws
 # 设置暴露所有端点
 management:
   endpoints:
     web:
       exposure:
 #        include: refresh
-        include: "*"
+#        include: "*"
+        include: health,arthas
+  endpoint:
     health:
       show-details: ALWAYS
+  server:
+    port: 18080
 #  security:
 #    enabled: false

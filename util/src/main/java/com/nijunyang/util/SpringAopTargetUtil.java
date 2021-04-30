@@ -32,14 +32,7 @@ public class SpringAopTargetUtil {
             return getCglibProxyTargetObject(proxy);
         }
     }
-    /**
-     * @MethodName: getCglibProxyTargetObject
-     * @Description: CGLIB方式被代理类的获取
-     * @Author: Jiajiajia
-     * @Params:  * @param proxy
-     * @Return {@link Object}
-     * @date 2020/12/20
-     */
+
     private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
         h.setAccessible(true);
@@ -49,14 +42,7 @@ public class SpringAopTargetUtil {
         Object target = ((AdvisedSupport)advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
         return target;
     }
-    /**
-     * @MethodName: getJdkDynamicProxyTargetObject
-     * @Description: JDK动态代理方式被代理类的获取
-     * @Author: Jiajiajia
-     * @Params:  * @param proxy
-     * @Return {@link Object}
-     * @date 2020/12/20
-     */
+
     private static Object getJdkDynamicProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
         h.setAccessible(true);
