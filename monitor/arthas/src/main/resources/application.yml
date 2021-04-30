@@ -1,0 +1,16 @@
+server:
+  port: 9090
+
+arthas:
+  agent-id: hsehdfsfghhwertyfad
+  tunnel-server: ws://127.0.0.1:7777/ws
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,arthas
+  endpoint:
+    health:
+      show-details: ALWAYS
+  server:
+    port: 19090
