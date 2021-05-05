@@ -42,6 +42,7 @@
         <module>autoconfig</module>
         <module>aspect</module>
         <module>algorithm</module>
+        <module>monitor</module>
     </modules>
 	<name>study</name>
 	<description>Demo project for Spring Boot</description>
