@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @GetMapping("/test")
-    public ResponseEntity<Object> test(Param param) {
-        return ResponseEntity.ok(param);
+    public Param test(Param param) {
+        return param;
     }
 
 
