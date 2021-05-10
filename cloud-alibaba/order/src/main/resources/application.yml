@@ -33,14 +33,10 @@ feign:
     config:
       default:
         loggerLevel: full
+        #这里时间一定要调长，否则feign客户端会报ReadTimeOut  服务端报Error parsing HTTP request header
+        connectTimeout: 60000
+        readTimeout: 60000
 
-#feign:
-#  client:
-#    default:
-#      #这里时间一定要调长，否则feign客户端会报ReadTimeOut  服务端报Error parsing HTTP request header
-#      connectTimeout: 60000
-#      readTimeout: 60000
-#      loggerLevel: basic
 #server:
 #  servlet:
 #    context-path: /
