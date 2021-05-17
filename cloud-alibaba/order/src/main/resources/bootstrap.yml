@@ -15,3 +15,8 @@ spring:
     name: order
   profiles:
     active: dev
+
+logging:
+  level:
+    com.alibaba.nacos.client: off
+    com.alibaba.cloud.nacos.client: off
