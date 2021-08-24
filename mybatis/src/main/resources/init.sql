@@ -65,8 +65,8 @@ INSERT INTO `teacher` VALUES ('3', '张老师');
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) DEFAULT NULL,
-  `userCard` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `user_card` varchar(255) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
