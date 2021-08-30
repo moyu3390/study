@@ -1,0 +1,16 @@
+1. .ssh目录配置config文件：
+Host jump
+ HostName 0.0.0.0
+ Port 50001
+ User dev
+ ServerAliveInterval 30
+
+2.配置跳板机的免密
+
+3.端口转发脚本：
+# nacos
+nohup ssh -CfNg -L 30848:10.10.10.10:8848 jump > /dev/null 2>&1 &
+# maven
+nohup ssh -CfNg -L 8081:10.10.10.10:8081 jump > /dev/null 2>&1 &
+# mysql
+nohup ssh -CfNg -L 3306:0.0.0.0:3306 jump > /dev/null 2>&1 &
