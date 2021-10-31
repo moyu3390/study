@@ -1,7 +1,9 @@
 package com.nijunyang.order.controller;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
+import com.nijunyang.order.feign.StockClient;
 import com.nijunyang.order.feign.StockFeignClient;
+import com.nijunyang.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -26,20 +28,29 @@ public class OrderController {
     @Autowired
     private StockFeignClient stockFeignClient;
 
-    @Value("${info.test}")
+    @Autowired
+    private OrderService orderService;
+
+    @Value("${info.test:}")
     private String info;
 
-    @Value("${info.database}")
+    @Value("${info.database:}")
     private String database;
 
-    @Value("${info.redis}")
+    @Value("${info.redis:}")
     private String redis;
 
     @GetMapping("/create")
-    public ResponseEntity<String> create() {
-        String result = stockFeignClient.deductStock();
-        return new ResponseEntity<String>("order success + " + result, HttpStatus.OK);
+    public ResponseEntity<String> create(String userId, Integer commodityId, Integer quantity) {
+        orderService.create(userId, commodityId, quantity);
+        return new ResponseEntity<>("order success + ", HttpStatus.OK);
     }
+
+//    @GetMapping("/create")
+//    public ResponseEntity<String> create() {
+//        String result = stockFeignClient.deductStock();
+//        return new ResponseEntity<String>("order success + " + result, HttpStatus.OK);
+//    }
 
     @GetMapping("/properties")
     public ResponseEntity<String> properties() {

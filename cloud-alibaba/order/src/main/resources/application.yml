@@ -1,29 +1,45 @@
+server:
+  port: 8080
 spring:
   application:
     name: order
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848  #不用写协议
         #        namespace: 688bf906-8b48-4ee2-a433-828f042ec860   #test id
         #        group: pay
-        cluster-name: CD
-        metadata:
-          version: v2
+#        cluster-name: CD
+#        metadata:
+#          version: v2
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
 
-ribbon:
-  NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule #指定全局的负载均衡算法
-  eager-load:
-    enabled: true #饥饿加载（ribbon客户端不是在服务启动的时候加载的，所以可能第一次调用会很慢，甚至超时）
-    clients: stock #指定哪些服务使用饥饿加载
-#按服务指定负载均衡算法
-stock:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule
-    eager-load:
-      enabled: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/seata?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+
+#ribbon:
+#  NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule #指定全局的负载均衡算法
+#  eager-load:
+#    enabled: true #饥饿加载（ribbon客户端不是在服务启动的时候加载的，所以可能第一次调用会很慢，甚至超时）
+#    clients: stock #指定哪些服务使用饥饿加载
+##按服务指定负载均衡算法
+#stock:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.nijunyang.order.ribbon.rule.ClusterWithVersionRule
+#    eager-load:
+#      enabled: true
 logging:
   level:
+    com.nijunyang.mysqlcommon.mapper: debug
     com:
       nijunyang:
         order:
@@ -40,4 +56,3 @@ feign:
 #server:
 #  servlet:
 #    context-path: /
-
