@@ -1,0 +1,31 @@
+
+mysql:
+  datasource1:
+    url: jdbc:mysql://localhost:3306/njytest1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    minPoolsize: 3
+    maxPoolSize: 25
+    maxLifetime: 30000
+    borrowConnectionTimeout: 30
+    loginTimeout: 30
+    maintenanceInterval: 60
+    maxIdleTime: 60
+    testQuery: SELECT 1
+
+  datasource2:
+    url: jdbc:mysql://localhost:3306/njytest2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    minPoolsize: 3
+    maxPoolSize: 25
+    maxLifetime: 30000
+    borrowConnectionTimeout: 30
+    loginTimeout: 30
+    maintenanceInterval: 60
+    maxIdleTime: 60
+    testQuery: SELECT 1
+logging:
+  level:
+    com.nijunyang.tx.xa.mapper1: debug
+    com.nijunyang.tx.xa.mapper2: debug

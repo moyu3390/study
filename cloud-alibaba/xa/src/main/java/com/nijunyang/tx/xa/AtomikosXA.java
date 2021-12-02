@@ -1,4 +1,4 @@
-package com.nijunyang.xa;
+package com.nijunyang.tx.xa;
 
 import com.atomikos.icatch.jta.UserTransactionImp;
 import com.atomikos.jdbc.AtomikosDataSourceBean;
