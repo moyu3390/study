@@ -23,7 +23,7 @@ public class OrderService {
     @Transactional(rollbackFor = Exception.class)
     public void create(Order order) {
         orderMapper.insert(order);
-        storageMapper.reduce(order.getCommodityId(), order.getQuantity());
+        storageMapper.reduce(order.getProductId(), order.getQuantity());
 //        int a = 1/0;
     }
 }

@@ -1,13 +1,14 @@
 package com.nijunyang.tx.xa.controller;
 
 import com.nijunyang.tx.common.entity.Order;
+import com.nijunyang.tx.common.enums.OrderStatus;
 import com.nijunyang.tx.xa.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Description:
@@ -20,9 +21,11 @@ public class OrderController {
     @Resource
     private OrderService orderService;
 
-    //127.0.0.1:8080/order?userId=1&commodityId=1&quantity=2&price=10
+    //127.0.0.1:8080/order?userId=123&productId=1&quantity=2&amount=10
     @GetMapping
     public Object create(Order order) {
+        order.setOrderStatus(OrderStatus.PAY_SUCCESS);
+        order.setNumber(UUID.randomUUID().toString());
         orderService.create(order);
         return 1;
     }

@@ -2,7 +2,6 @@ package com.nijunyang.tx.xa.config;
 
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.mysql.cj.jdbc.MysqlXADataSource;
-import com.nijunyang.tx.xa.mapper2.StorageMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;

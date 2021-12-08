@@ -1,0 +1,29 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: stock
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848  #不用写协议
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/njytest3?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+logging:
+  level:
+    com.nijunyang.tx.common.mapper: debug
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+        #这里时间一定要调长，否则feign客户端会报ReadTimeOut  服务端报Error parsing HTTP request header
+        connectTimeout: 60000
+        readTimeout: 60000

@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StorageMapper extends BaseMapper<Storage> {
 
-    @Update("UPDATE storage SET quantity = quantity - #{quantity} WHERE commodity_id = #{commodityId} and quantity >= #{quantity}")
-    void reduce(Integer commodityId, Integer quantity);
+    @Update("UPDATE storage SET total_inventory = total_inventory - #{quantity} WHERE product_id = #{productId} and total_inventory >= #{quantity}")
+    void reduce(Integer productId, Integer quantity);
 }
