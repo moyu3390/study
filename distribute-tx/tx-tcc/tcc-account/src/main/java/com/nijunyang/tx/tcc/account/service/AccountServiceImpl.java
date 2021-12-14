@@ -11,7 +11,7 @@ import javax.annotation.Resource;
  * Description:
  * Created by nijunyang on 2021/12/8 1:43
  */
-@Service("accountService")
+@Service
 public class AccountServiceImpl implements AccountService {
 
     @Resource
