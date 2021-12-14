@@ -98,3 +98,9 @@ create table if not exists `hmily_transaction_participant`
     DEFAULT CHARSET = utf8mb4
 
     COLLATE = utf8mb4_unicode_ci comment 'hmily事务参与者';
+
+CREATE TABLE `tx_log`  (
+    `tx_no` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分布式事务全局序列号',
+    `create_time` timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`tx_no`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事务记录'

@@ -24,6 +24,7 @@
         <module>tx-common</module>
         <module>tx-xa</module>
         <module>tx-tcc</module>
+        <module>tx-mq</module>
     </modules>
 
     <dependencies>
