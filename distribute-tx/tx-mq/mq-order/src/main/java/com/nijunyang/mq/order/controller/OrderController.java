@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -16,11 +17,12 @@ import java.math.BigDecimal;
 @RequestMapping("/order")
 public class OrderController {
 
+    @Resource
     private OrderService orderService;
 
-    //127.0.0.1:8081/order/productId=1&quantity=1&amount=5
+    //127.0.0.1:8081/order?productId=1&quantity=1&amount=5
     @GetMapping
-    public String transfer(@RequestParam(value = "productId") Integer productId,
+    public String create(@RequestParam(value = "productId") Integer productId,
                            @RequestParam(value = "quantity") Integer quantity,
                            @RequestParam(value = "amount") BigDecimal amount){
         orderService.sendOrderMsg(productId, quantity, amount);

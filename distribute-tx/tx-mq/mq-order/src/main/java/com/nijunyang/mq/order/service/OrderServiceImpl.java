@@ -8,7 +8,6 @@ import com.nijunyang.tx.common.mapper.TxLogMapper;
 import com.nijunyang.tx.common.model.OrderTxMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,6 @@ public class OrderServiceImpl implements OrderService{
         TxLog txLog = txLogMapper.selectById(orderMsg.getTxNo());
         if (txLog != null) {
             log.info("订单已创建");
-
         } else {
             Order order = buildOrder(orderMsg.getProductId(), orderMsg.getQuantity(), orderMsg.getAmount());
             orderMapper.insert(order);

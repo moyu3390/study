@@ -1,0 +1,26 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: stock
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/njytest3?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+rocketmq:
+  name-server: 192.168.0.67:9876
+
+logging:
+  level:
+    com.nijunyang.tx.common.mapper: debug
+
+
